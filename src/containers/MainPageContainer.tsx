@@ -42,7 +42,7 @@ export const MainPageContainer = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50">
-      <AppHeader onManageResumes={handleManageResumes}>
+      <AppHeader>
         {/* <LayoutSelector
           onLayoutChange={handleLayoutChange}
         /> */}

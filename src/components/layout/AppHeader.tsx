@@ -3,10 +3,9 @@ import { ResumeQuickSwitcher } from '@/components/ResumeQuickSwitcher';
 
 interface AppHeaderProps {
   children: React.ReactNode;
-  onManageResumes: () => void;
 }
 
-export const AppHeader = ({ children, onManageResumes }: AppHeaderProps) => {
+export const AppHeader = ({ children }: AppHeaderProps) => {
   return (
     <header className="bg-white/80 backdrop-blur-md shadow-lg border-b border-gray-200 sticky top-0 z-40">
       <div className="max-w-6xl mx-auto px-4 py-3">
@@ -28,7 +27,7 @@ export const AppHeader = ({ children, onManageResumes }: AppHeaderProps) => {
 
           {/* 中间的简历切换器 */}
           <div className="hidden mr-3 md:block">
-            <ResumeQuickSwitcher onManageClick={onManageResumes} />
+            <ResumeQuickSwitcher />
           </div>
 
           {/* 右侧操作区域 */}

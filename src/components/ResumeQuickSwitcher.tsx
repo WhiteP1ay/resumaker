@@ -3,11 +3,7 @@ import { useResumeManager } from '@/hooks/useResumeManager';
 import { ChevronDown, FileText } from 'lucide-react';
 import { useState } from 'react';
 
-interface ResumeQuickSwitcherProps {
-  onManageClick: () => void;
-}
-
-export const ResumeQuickSwitcher = ({ onManageClick }: ResumeQuickSwitcherProps) => {
+export const ResumeQuickSwitcher = () => {
   const {
     resumeList,
     currentResumeId,
@@ -80,20 +76,6 @@ export const ResumeQuickSwitcher = ({ onManageClick }: ResumeQuickSwitcherProps)
                   </div>
                 </button>
               ))}
-              
-              {/* 分隔线 */}
-              <hr className="my-1 border-gray-200" />
-              
-              {/* 管理按钮 */}
-              <button
-                className="w-full px-3 py-2 text-left text-sm hover:bg-gray-100 text-blue-600 font-medium"
-                onClick={() => {
-                  setIsOpen(false);
-                  onManageClick();
-                }}
-              >
-                管理简历...
-              </button>
             </div>
           </div>
         </>
