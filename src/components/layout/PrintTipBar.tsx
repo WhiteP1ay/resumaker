@@ -1,18 +1,19 @@
 import { Button } from '@/components/ui/button';
 import { Slider } from '@/components/ui/slider';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
-import { usePrintScale } from '@/hooks/components/usePrintScale';
 import { useBrowserDetection } from '@/hooks/useBrowserDetection';
-import { CircleQuestionMark, Printer } from 'lucide-react';
+import { CircleQuestionMark, Printer, FileText } from 'lucide-react';
 
 interface PrintTipBarProps {
   onPrint: () => void;
+  scale: number;
+  onScaleChange: (value: number) => void;
+  pageCount: number;
 }
 
-export const PrintTipBar = ({ onPrint }: PrintTipBarProps) => {
+export const PrintTipBar = ({ onPrint, scale, onScaleChange, pageCount }: PrintTipBarProps) => {
   const { getPrintTip } = useBrowserDetection();
   const { tip, shortcut } = getPrintTip();
-  const { scale, onScaleChange } = usePrintScale();
 
   return (
     <div className="bg-blue-600 text-white p-3 text-center print:hidden">
@@ -21,6 +22,15 @@ export const PrintTipBar = ({ onPrint }: PrintTipBarProps) => {
           {tip}
           {shortcut && <span className="ml-2 text-blue-200">({shortcut})</span>}
         </span>
+        
+        {/* 页数显示 */}
+        <div className="flex items-center space-x-1">
+          <FileText className="w-4 h-4 text-blue-200" />
+          <span className="text-sm">
+            A4纸约需 <span className="font-semibold">{pageCount}</span> 页
+          </span>
+        </div>
+
         <div className="flex items-center space-x-2">
           <span className="text-sm">缩放比例</span>
           <Tooltip>

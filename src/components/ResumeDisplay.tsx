@@ -5,12 +5,14 @@ import { TimelineSection } from './theme/TimelineSection';
 interface ResumeDisplayProps {
   resume: Resume;
   isEditable?: boolean;
+  scale?: number;
   className?: string;
 }
 
 export const ResumeDisplay = ({
   resume,
   isEditable = false,
+  scale = 100,
   className = '',
 }: ResumeDisplayProps) => {
   const getBasicInfoSection = () => {
@@ -31,7 +33,14 @@ export const ResumeDisplay = ({
   return (
     <div className={`print-container ${className}`}>
       {/* 简约风格简历容器 */}
-      <div className="max-w-4xl mx-auto bg-white shadow-lg print:shadow-none print:max-w-none">
+      <div 
+        className="max-w-4xl mx-auto bg-white shadow-lg print:shadow-none print:max-w-none"
+        style={{
+          transform: `scale(${scale / 100})`,
+          transformOrigin: 'top center',
+          transition: 'transform 0.2s ease-in-out',
+        }}
+      >
         {/* 基本信息区域 - 顶部 */}
         {basicInfoSection && (
           <BasicInfoSection section={basicInfoSection} isEditable={isEditable} />
