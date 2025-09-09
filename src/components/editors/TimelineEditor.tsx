@@ -52,7 +52,7 @@ export const TimelineEditor = ({
         <DialogHeader>
           <DialogTitle className="text-xl font-semibold text-gray-800 flex items-center space-x-3">
             <span>编辑{title}</span>
-            <span className="text-sm font-normal text-gray-500 ml-auto">{saveStatusText}</span>
+            <span className="text-sm font-normal text-gray-500 mr-auto pl-3">{saveStatusText}</span>
           </DialogTitle>
           <DialogDescription>在此处编辑您的{title}信息，所有更改将自动保存。</DialogDescription>
         </DialogHeader>

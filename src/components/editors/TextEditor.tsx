@@ -46,7 +46,7 @@ export const TextEditor = ({
         <DialogHeader>
           <DialogTitle className="flex items-center">
             编辑 {title}
-            <span className="text-sm font-normal text-gray-500 ml-auto">{saveStatusText}</span>
+            <span className="text-sm font-normal text-gray-500 mr-auto pl-3">{saveStatusText}</span>
           </DialogTitle>
           <DialogDescription>在此处编辑您的{title}信息，所有更改将自动保存。</DialogDescription>
         </DialogHeader>

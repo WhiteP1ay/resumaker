@@ -128,7 +128,7 @@ export const BasicInfoEditor = ({ isOpen, onClose, initialData, onSave }: BasicI
       <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
         <DialogTitle className="text-xl font-semibold text-gray-800 flex items-center space-x-3">
           <span>编辑基本信息</span>
-          <span className="text-sm font-normal text-gray-500 ml-auto">{saveStatusText}</span>
+          <span className="text-sm font-normal text-gray-500 mr-auto pl-3">{saveStatusText}</span>
         </DialogTitle>
         <DialogDescription>
           编辑个人基本信息，包括姓名、联系方式等，所有更改将自动保存。
