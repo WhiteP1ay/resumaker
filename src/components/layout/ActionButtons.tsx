@@ -1,15 +1,26 @@
-import { Eye, Trash2, Settings } from 'lucide-react';
+import { Eye, Trash2, Settings, FolderOpen } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 interface ActionButtonsProps {
   onPreview: () => void;
   onClear: () => void;
   onManageTimeline: () => void;
+  onManageResumes: () => void;
 }
 
-export const ActionButtons = ({ onPreview, onClear, onManageTimeline }: ActionButtonsProps) => {
+export const ActionButtons = ({ onPreview, onClear, onManageTimeline, onManageResumes }: ActionButtonsProps) => {
   return (
     <>
+      <Button
+        onClick={onManageResumes}
+        variant="outline"
+        size="sm"
+        className="flex items-center space-x-2 text-green-600 hover:text-green-700 hover:bg-green-50"
+      >
+        <FolderOpen className="h-4 w-4" />
+        <span className="hidden sm:inline">简历管理</span>
+      </Button>
+
       <Button
         onClick={onManageTimeline}
         variant="outline"

@@ -4,7 +4,7 @@ import * as React from 'react';
 import { X } from 'lucide-react';
 
 const floatingMessageVariants = cva(
-  'fixed z-50 max-w-sm rounded-lg border shadow-lg transition-all duration-300 ease-in-out print:hidden',
+  'fixed z-[9999] max-w-sm rounded-lg border shadow-lg transition-all duration-300 ease-in-out print:hidden',
   {
     variants: {
       variant: {
@@ -69,7 +69,9 @@ const FloatingMessage = React.forwardRef<HTMLDivElement, FloatingMessageProps>(
     const [isAnimating, setIsAnimating] = React.useState(false);
 
     React.useEffect(() => {
+      console.log('FloatingMessage useEffect:', { isVisible, autoClose, autoCloseDelay });
       if (isVisible) {
+        console.log('显示消息:', message);
         setIsAnimating(true);
 
         if (autoClose) {
@@ -82,7 +84,7 @@ const FloatingMessage = React.forwardRef<HTMLDivElement, FloatingMessageProps>(
       } else {
         setIsAnimating(false);
       }
-    }, [isVisible, autoClose, autoCloseDelay]);
+    }, [isVisible, autoClose, autoCloseDelay, message]);
 
     const handleClose = () => {
       setIsAnimating(false);

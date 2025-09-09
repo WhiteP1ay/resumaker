@@ -30,13 +30,13 @@ export interface TimelineItem {
   description: string;
 }
 
-// 新增：列表项类型
+// 列表项类型
 export interface ListItem {
   id: string;
   content: string;
 }
 
-// 新增：纯文本内容类型
+// 纯文本内容类型
 export interface TextContent {
   content: string;
 }
@@ -63,4 +63,19 @@ export interface Resume {
 export interface IconOption {
   name: string;
   icon: LucideIcon;
+}
+
+// 简历管理相关类型
+export interface ResumeMetadata {
+  id: string;
+  title: string;
+  createdAt: string;
+  updatedAt: string;
+  description?: string;
+}
+
+export interface ResumeCollection {
+  currentResumeId: string;
+  resumes: Record<string, Resume>;
+  metadata: Record<string, ResumeMetadata>;
 }

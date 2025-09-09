@@ -7,6 +7,7 @@ import { ClearConfirmDialog } from '@/components/dialogs/ClearConfirmDialog';
 import { ActionButtons } from '@/components/layout/ActionButtons';
 import { AppFooter } from '@/components/layout/AppFooter';
 import { resetResumeAtom, resumeAtom } from '@/store/resumeStore';
+import { ResumeManagerDialog } from '@/components/dialogs/ResumeManagerDialog';
 
 // 懒加载模块管理器（无loading，包很小会一闪而过）
 const SectionManager = React.lazy(() => import('@/components/dialogs/TimelineManagerDialog'));
@@ -16,6 +17,7 @@ export const MainPageContainer = () => {
   const resetResume = useSetAtom(resetResumeAtom);
   const [showClearDialog, setShowClearDialog] = useState(false);
   const [showTimelineManager, setShowTimelineManager] = useState(false);
+  const [showResumeManager, setShowResumeManager] = useState(false);
 
   const handlePreview = () => {
     window.open('/preview', '_blank');
@@ -34,9 +36,13 @@ export const MainPageContainer = () => {
     setShowTimelineManager(true);
   };
 
+  const handleManageResumes = () => {
+    setShowResumeManager(true);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50">
-      <AppHeader>
+      <AppHeader onManageResumes={handleManageResumes}>
         {/* <LayoutSelector
           onLayoutChange={handleLayoutChange}
         /> */}
@@ -44,6 +50,7 @@ export const MainPageContainer = () => {
           onPreview={handlePreview}
           onClear={() => setShowClearDialog(true)}
           onManageTimeline={handleManageTimeline}
+          onManageResumes={handleManageResumes}
         />
       </AppHeader>
 
@@ -70,6 +77,9 @@ export const MainPageContainer = () => {
           />
         </Suspense>
       )}
+
+      {/* 简历管理对话框 */}
+      <ResumeManagerDialog isOpen={showResumeManager} onClose={() => setShowResumeManager(false)} />
 
       <AppFooter />
     </div>

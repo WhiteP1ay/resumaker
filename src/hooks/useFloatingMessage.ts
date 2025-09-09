@@ -16,12 +16,12 @@ export const useFloatingMessage = (options: UseFloatingMessageOptions = {}) => {
   const [isVisible, setIsVisible] = useState(defaultVisible);
   const [message, setMessage] = useState('');
   const [variant, setVariant] = useState<'default' | 'info' | 'success' | 'warning' | 'error'>('default');
-  const [position, setPosition] = useState<'top-right' | 'top-left' | 'bottom-right' | 'bottom-left' | 'top-center' | 'bottom-center'>('top-right');
+  const [position, setPosition] = useState<'top-right' | 'top-left' | 'bottom-right' | 'bottom-left' | 'top-center' | 'bottom-center'>('top-center');
 
   const showMessage = useCallback((
     newMessage: string,
     messageVariant: 'default' | 'info' | 'success' | 'warning' | 'error' = 'default',
-    messagePosition: 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left' | 'top-center' | 'bottom-center' = 'top-right'
+    messagePosition: 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left' | 'top-center' | 'bottom-center' = 'top-center'
   ) => {
     setMessage(newMessage);
     setVariant(messageVariant);
@@ -42,7 +42,7 @@ export const useFloatingMessage = (options: UseFloatingMessageOptions = {}) => {
   }, [showMessage]);
 
   const showWarning = useCallback((msg: string, pos?: 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left' | 'top-center' | 'bottom-center') => {
-    showMessage(msg, 'success', pos);
+    showMessage(msg, 'warning', pos);
   }, [showMessage]);
 
   const showError = useCallback((msg: string, pos?: 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left' | 'top-center' | 'bottom-center') => {
