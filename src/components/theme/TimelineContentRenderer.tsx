@@ -8,13 +8,11 @@ interface ListContentProps {
 }
 
 export const ListContent = ({ data }: ListContentProps) => (
-  <div className="space-y-3 print:space-y-2">
+  <div className="space-y-1 print:space-y-1">
     {data.map((item, index) => (
       <div key={item.id} className="flex items-start space-x-3">
-        <span className="text-sm font-medium text-blue-600 mt-0.5 shrink-0">{index + 1}.</span>
-        <div className="text-sm text-gray-700 leading-relaxed">
-          <pre className="text-wrap">{item.content}</pre>
-        </div>
+        <span className="text-sm font-medium mt-0.5 shrink-0">{index + 1}.</span>
+        <div className="text-sm text-gray-700 leading-relaxed">{item.content}</div>
       </div>
     ))}
   </div>

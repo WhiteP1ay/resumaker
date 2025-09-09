@@ -2,7 +2,7 @@ import { Button } from '@/components/ui/button';
 import { Slider } from '@/components/ui/slider';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { useBrowserDetection } from '@/hooks/useBrowserDetection';
-import { CircleQuestionMark, Printer, FileText } from 'lucide-react';
+import { CircleQuestionMark, FileText, Printer } from 'lucide-react';
 
 interface PrintTipBarProps {
   onPrint: () => void;
@@ -22,7 +22,7 @@ export const PrintTipBar = ({ onPrint, scale, onScaleChange, pageCount }: PrintT
           {tip}
           {shortcut && <span className="ml-2 text-blue-200">({shortcut})</span>}
         </span>
-        
+
         {/* 页数显示 */}
         <div className="flex items-center space-x-1">
           <FileText className="w-4 h-4 text-blue-200" />
@@ -52,13 +52,13 @@ export const PrintTipBar = ({ onPrint, scale, onScaleChange, pageCount }: PrintT
             className="w-20"
             onValueChange={(value) => onScaleChange(value[0])}
           ></Slider>
-          {scale}%
+          <span className="ml-1">{scale}%</span>
         </div>
         <Button
           onClick={onPrint}
           variant="outline"
           size="sm"
-          className="bg-white text-blue-600 hover:bg-gray-100"
+          className="bg-white text-blue-600 outline-none hover:bg-gray-100 focus:bg-gray-300"
         >
           <Printer className="h-4 w-4 mr-2" />
           打印简历
