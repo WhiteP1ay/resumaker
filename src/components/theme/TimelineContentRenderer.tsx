@@ -12,7 +12,7 @@ export const ListContent = ({ data }: ListContentProps) => (
     {data.map((item, index) => (
       <div key={item.id} className="flex items-start space-x-3">
         <span className="text-sm font-medium mt-0.5 shrink-0">{index + 1}.</span>
-        <div className="text-sm text-gray-700 leading-relaxed">{item.content}</div>
+        <span className="text-sm text-gray-700 leading-relaxed">{item.content}</span>
       </div>
     ))}
   </div>

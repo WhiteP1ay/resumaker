@@ -2,14 +2,12 @@ import { ResumeDisplay } from '@/components/ResumeDisplay';
 import { PreviewPageFooter } from '@/components/layout/PreviewPageFooter';
 import { PrintTipBar } from '@/components/layout/PrintTipBar';
 import { usePreviewScale } from '@/hooks/components/usePreviewScale';
-import { usePageCount } from '@/hooks/components/usePageCount';
 import { resumeAtom } from '@/store/resumeStore';
 import { useAtomValue } from 'jotai';
 
 export const PreviewPageContainer = () => {
   const resume = useAtomValue(resumeAtom);
   const { scale, onScaleChange } = usePreviewScale();
-  const { pageCount } = usePageCount(scale);
 
   const handlePrint = () => {
     window.print();
@@ -21,7 +19,6 @@ export const PreviewPageContainer = () => {
         onPrint={handlePrint}
         scale={scale}
         onScaleChange={onScaleChange}
-        pageCount={pageCount}
       />
 
       {/* 简历内容 */}
