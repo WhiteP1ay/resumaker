@@ -17,10 +17,10 @@ export const PreviewPageContainer = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 print:bg-white">
-      <PrintTipBar 
-        onPrint={handlePrint} 
-        scale={scale} 
-        onScaleChange={onScaleChange} 
+      <PrintTipBar
+        onPrint={handlePrint}
+        scale={scale}
+        onScaleChange={onScaleChange}
         pageCount={pageCount}
       />
 

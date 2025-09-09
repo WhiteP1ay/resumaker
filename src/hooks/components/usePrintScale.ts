@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 export const usePrintScale = () => {
-  const [scale, setScale] = useState(80);
+  const [scale, setScale] = useState(100);
 
   const updatePrintStyle = (value: number) => {
     const printStyleId = 'custom-print-scale-style';
