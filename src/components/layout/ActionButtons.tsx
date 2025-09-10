@@ -1,5 +1,8 @@
-import { Eye, Trash2, Settings, FolderOpen } from 'lucide-react';
+import { Eye, FolderOpen, Settings, Trash2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { AIPlatformDropdown } from '@/components/AIPlatformDropdown';
+import { AIPlatformManagerDialog } from '@/components/dialogs/AIPlatformManagerDialog';
+import { useState } from 'react';
 
 interface ActionButtonsProps {
   onPreview: () => void;
@@ -8,7 +11,14 @@ interface ActionButtonsProps {
   onManageResumes: () => void;
 }
 
-export const ActionButtons = ({ onPreview, onClear, onManageTimeline, onManageResumes }: ActionButtonsProps) => {
+export const ActionButtons = ({
+  onPreview,
+  onClear,
+  onManageTimeline,
+  onManageResumes,
+}: ActionButtonsProps) => {
+  const [isAIPlatformDialogOpen, setIsAIPlatformDialogOpen] = useState(false);
+
   return (
     <>
       <Button
@@ -51,7 +61,18 @@ export const ActionButtons = ({ onPreview, onClear, onManageTimeline, onManageRe
         <span className="hidden sm:inline">重置</span>
       </Button>
 
-      <div className="hidden lg:block text-xs text-gray-500">💡 点击模块右上角编辑按钮修改内容</div>
+      {/* 常用AI工具平台 */}
+      <div className="hidden lg:block">
+        <AIPlatformDropdown 
+          onManagePlatforms={() => setIsAIPlatformDialogOpen(true)} 
+        />
+      </div>
+
+      {/* AI平台管理对话框 */}
+      <AIPlatformManagerDialog
+        isOpen={isAIPlatformDialogOpen}
+        onClose={() => setIsAIPlatformDialogOpen(false)}
+      />
     </>
   );
 };

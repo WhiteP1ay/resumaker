@@ -31,6 +31,7 @@
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-image-crop": "^11.0.10",
+    "react-minisearch": "^7.1.4",
     "react-router-dom": "^7.7.1",
     "tailwind-merge": "^3.3.1"
   },
