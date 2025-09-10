@@ -10,18 +10,18 @@ export const DEFAULT_AI_PLATFORMS: AIPlatform[] = [
     id: 'deepseek',
     name: 'DeepSeek Chat',
     url: 'https://chat.deepseek.com/',
-    icon: '💬'
+    icon: ''
   },
   {
     id: 'qwen',
     name: 'Qwen Chat',
     url: 'https://chat.qwen.ai/',
-    icon: '💬'
+    icon: ''
   },
   {
     id: 'doubao',
     name: '豆包',
     url: 'https://www.doubao.com/chat/',
-    icon: '💬'
+    icon: ''
   }
 ];

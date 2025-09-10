@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { ChevronDown, Settings, ExternalLink } from 'lucide-react';
+import { ChevronDown, Settings, ExternalLink, MessageSquare } from 'lucide-react';
 import { useAtomValue } from 'jotai';
 import { aiPlatformsAtom } from '@/store/aiPlatformStore';
 
@@ -19,6 +19,11 @@ export const AIPlatformDropdown = ({ onManagePlatforms }: AIPlatformDropdownProp
 
   const handleManageClick = () => {
     onManagePlatforms();
+    setIsOpen(false);
+  };
+
+  const handlePromptManageClick = () => {
+    window.open('/prompts', '_blank', 'noopener,noreferrer');
     setIsOpen(false);
   };
 
@@ -76,6 +81,15 @@ export const AIPlatformDropdown = ({ onManagePlatforms }: AIPlatformDropdownProp
               >
                 <Settings className="h-4 w-4" />
                 <span>管理AI平台</span>
+              </button>
+
+              {/* 提示词管理按钮 */}
+              <button
+                className="w-full px-3 py-2 text-left text-sm hover:bg-gray-100 flex items-center space-x-2 text-green-600"
+                onClick={handlePromptManageClick}
+              >
+                <MessageSquare className="h-4 w-4" />
+                <span>管理简历优化提示词</span>
               </button>
             </div>
           </div>

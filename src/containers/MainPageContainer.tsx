@@ -1,6 +1,6 @@
 import { AppHeader } from '@/components/layout/AppHeader';
 import { ResumeDisplay } from '@/components/ResumeDisplay';
-import { ResumeSidebar } from '@/components/sidebar/ResumeSidebar';
+import { ResumeSidebar } from '@/components/layout/ResumeSidebar.tsx';
 import { useAtomValue, useSetAtom } from 'jotai';
 import React, { Suspense, useEffect, useState } from 'react';
 import { ClearConfirmDialog } from '@/components/dialogs/ClearConfirmDialog';
