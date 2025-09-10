@@ -239,8 +239,8 @@ export const deleteResumeAtom = atom(null, (get, set, resumeId: string) => {
     return false;
   }
 
-  const { [resumeId]: deletedResume, ...remainingResumes } = collection.resumes;
-  const { [resumeId]: deletedMetadata, ...remainingMetadata } = collection.metadata;
+  const { ...remainingResumes } = collection.resumes;
+  const { ...remainingMetadata } = collection.metadata;
 
   // 如果删除的是当前简历，切换到第一个可用的简历
   let newCurrentId = collection.currentResumeId;
@@ -375,57 +375,54 @@ export const importResumeAtom = atom(
 );
 
 // 批量导入简历
-export const importBatchResumesAtom = atom(
-  null,
-  (get, set, resumes: Resume[]) => {
-    const collection = get(resumeCollectionAtom);
-    const now = new Date().toISOString();
-    const importedIds: string[] = [];
+export const importBatchResumesAtom = atom(null, (get, set, resumes: Resume[]) => {
+  const collection = get(resumeCollectionAtom);
+  const now = new Date().toISOString();
+  const importedIds: string[] = [];
 
-    // 准备新的简历和元数据
-    const newResumes: Record<string, Resume> = { ...collection.resumes };
-    const newMetadata: Record<string, ResumeMetadata> = { ...collection.metadata };
+  // 准备新的简历和元数据
+  const newResumes: Record<string, Resume> = { ...collection.resumes };
+  const newMetadata: Record<string, ResumeMetadata> = { ...collection.metadata };
 
-    for (const resume of resumes) {
-      // 确保ID唯一
-      let newId = resume.id;
-      let counter = 1;
-      while (newResumes[newId]) {
-        newId = `${resume.id}_${counter}`;
-        counter++;
-      }
-
-      const importedResume: Resume = {
-        ...resume,
-        id: newId,
-      };
-
-      const importedMetadata: ResumeMetadata = {
-        id: newId,
-        title: resume.title,
-        createdAt: now,
-        updatedAt: now,
-        description: '导入的简历',
-      };
-
-      newResumes[newId] = importedResume;
-      newMetadata[newId] = importedMetadata;
-      importedIds.push(newId);
+  for (const resume of resumes) {
+    // 确保ID唯一
+    let newId = resume.id;
+    let counter = 1;
+    while (newResumes[newId]) {
+      newId = `${resume.id}_${counter}`;
+      counter++;
     }
 
-    // 如果导入了简历，将当前简历切换到第一个导入的简历
-    const newCurrentId = importedIds.length > 0 ? importedIds[0] : collection.currentResumeId;
+    const importedResume: Resume = {
+      ...resume,
+      id: newId,
+    };
 
-    set(resumeCollectionAtom, {
-      ...collection,
-      currentResumeId: newCurrentId,
-      resumes: newResumes,
-      metadata: newMetadata,
-    });
+    const importedMetadata: ResumeMetadata = {
+      id: newId,
+      title: resume.title,
+      createdAt: now,
+      updatedAt: now,
+      description: '导入的简历',
+    };
 
-    return importedIds;
+    newResumes[newId] = importedResume;
+    newMetadata[newId] = importedMetadata;
+    importedIds.push(newId);
   }
-);
+
+  // 如果导入了简历，将当前简历切换到第一个导入的简历
+  const newCurrentId = importedIds.length > 0 ? importedIds[0] : collection.currentResumeId;
+
+  set(resumeCollectionAtom, {
+    ...collection,
+    currentResumeId: newCurrentId,
+    resumes: newResumes,
+    metadata: newMetadata,
+  });
+
+  return importedIds;
+});
 
 // 获取所有简历列表
 export const resumeListAtom = atom((get) => {
@@ -436,46 +433,43 @@ export const resumeListAtom = atom((get) => {
 });
 
 // 批量删除简历
-export const batchDeleteResumesAtom = atom(
-  null,
-  (get, set, resumeIds: string[]) => {
-    const collection = get(resumeCollectionAtom);
-    
-    // 不能删除所有简历，至少要保留一个
-    if (resumeIds.length >= Object.keys(collection.resumes).length) {
-      return false;
-    }
+export const batchDeleteResumesAtom = atom(null, (get, set, resumeIds: string[]) => {
+  const collection = get(resumeCollectionAtom);
 
-    // 过滤出要删除的简历
-    const resumesToDelete = resumeIds.filter(id => collection.resumes[id]);
-    if (resumesToDelete.length === 0) {
-      return false;
-    }
-
-    // 创建新的简历和元数据对象，排除要删除的简历
-    const newResumes: Record<string, Resume> = { ...collection.resumes };
-    const newMetadata: Record<string, ResumeMetadata> = { ...collection.metadata };
-    
-    resumesToDelete.forEach(id => {
-      delete newResumes[id];
-      delete newMetadata[id];
-    });
-
-    // 如果当前简历被删除了，切换到第一个可用的简历
-    let newCurrentId = collection.currentResumeId;
-    if (resumesToDelete.includes(collection.currentResumeId)) {
-      newCurrentId = Object.keys(newResumes)[0];
-    }
-
-    set(resumeCollectionAtom, {
-      currentResumeId: newCurrentId,
-      resumes: newResumes,
-      metadata: newMetadata,
-    });
-
-    return true;
+  // 不能删除所有简历，至少要保留一个
+  if (resumeIds.length >= Object.keys(collection.resumes).length) {
+    return false;
   }
-);
+
+  // 过滤出要删除的简历
+  const resumesToDelete = resumeIds.filter((id) => collection.resumes[id]);
+  if (resumesToDelete.length === 0) {
+    return false;
+  }
+
+  // 创建新的简历和元数据对象，排除要删除的简历
+  const newResumes: Record<string, Resume> = { ...collection.resumes };
+  const newMetadata: Record<string, ResumeMetadata> = { ...collection.metadata };
+
+  resumesToDelete.forEach((id) => {
+    delete newResumes[id];
+    delete newMetadata[id];
+  });
+
+  // 如果当前简历被删除了，切换到第一个可用的简历
+  let newCurrentId = collection.currentResumeId;
+  if (resumesToDelete.includes(collection.currentResumeId)) {
+    newCurrentId = Object.keys(newResumes)[0];
+  }
+
+  set(resumeCollectionAtom, {
+    currentResumeId: newCurrentId,
+    resumes: newResumes,
+    metadata: newMetadata,
+  });
+
+  return true;
+});
 
 // 获取当前简历ID
 export const currentResumeIdAtom = atom((get) => {

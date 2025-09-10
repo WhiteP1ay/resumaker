@@ -75,8 +75,8 @@ export const useResumeManager = () => {
   const importSingleResume = useCallback(async (showMessage?: (message: string, variant?: 'default' | 'info' | 'success' | 'warning' | 'error') => void) => {
     const resume = await importResumeFromFile(showMessage);
     if (resume) {
-      const newId = importResume(resume);
-      return newId;
+      // 返回 newId
+      return importResume(resume);
     }
     return null;
   }, [importResume]);

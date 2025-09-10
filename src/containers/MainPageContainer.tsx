@@ -1,8 +1,8 @@
 import { AppHeader } from '@/components/layout/AppHeader';
 import { ResumeDisplay } from '@/components/ResumeDisplay';
+import { ResumeSidebar } from '@/components/sidebar/ResumeSidebar';
 import { useAtomValue, useSetAtom } from 'jotai';
 import React, { Suspense, useEffect, useState } from 'react';
-// import { LayoutSelector } from '@/components/LayoutSelector'
 import { ClearConfirmDialog } from '@/components/dialogs/ClearConfirmDialog';
 import { ActionButtons } from '@/components/layout/ActionButtons';
 import { AppFooter } from '@/components/layout/AppFooter';
@@ -20,6 +20,7 @@ export const MainPageContainer = () => {
   const [showClearDialog, setShowClearDialog] = useState(false);
   const [showTimelineManager, setShowTimelineManager] = useState(false);
   const [showResumeManager, setShowResumeManager] = useState(false);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
   const { isVisible, message, variant, position, hideMessage, autoClose, autoCloseDelay } =
     useFloatingMessage();
@@ -37,10 +38,6 @@ export const MainPageContainer = () => {
     setShowClearDialog(false);
   };
 
-  // const handleLayoutChange = (layout: 'side-by-side' | 'top-bottom') => {
-  //   setResume({ ...resume, layout })
-  // }
-
   const handleManageTimeline = () => {
     setShowTimelineManager(true);
   };
@@ -49,13 +46,14 @@ export const MainPageContainer = () => {
     setShowResumeManager(true);
   };
 
+  const toggleSidebar = () => {
+    setSidebarCollapsed(!sidebarCollapsed);
+  };
+
   return (
     <>
       <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50">
         <AppHeader>
-          {/* <LayoutSelector
-          onLayoutChange={handleLayoutChange}
-        /> */}
           <ActionButtons
             onPreview={handlePreview}
             onClear={() => setShowClearDialog(true)}
@@ -64,13 +62,26 @@ export const MainPageContainer = () => {
           />
         </AppHeader>
 
-        <main className="max-w-6xl mx-auto p-4">
-          <ResumeDisplay
-            resume={resume}
-            isEditable={true}
-            className="bg-gradient-to-br from-gray-50 to-blue-50 min-h-screen"
-          />
-        </main>
+        <div className="flex">
+          {/* 左侧边栏 */}
+          <div className="hidden p-4 lg:block">
+            <ResumeSidebar
+              isCollapsed={sidebarCollapsed}
+              onToggleCollapse={toggleSidebar}
+            />
+          </div>
+
+          {/* 主内容区域 */}
+          <main className="flex-1 overflow-hidden">
+            <div className="max-w-6xl mx-auto p-4">
+              <ResumeDisplay
+                resume={resume}
+                isEditable={true}
+                className="bg-gradient-to-br from-gray-50 to-blue-50 min-h-screen"
+              />
+            </div>
+          </main>
+        </div>
 
         <ClearConfirmDialog
           isOpen={showClearDialog}
