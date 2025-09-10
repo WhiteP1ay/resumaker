@@ -1,10 +1,8 @@
-# 📝 Resumaker - 简历编辑器
+# 📝 Resumaker-feature - 简历编辑器
 
-一个基于 React + TypeScript 构建的简历编辑器。
+本项目基于 [resumaker](https://github.com/WhiteP1ay/resumaker) 扩展而来，在原项目的基础上新增了一些致力于用户体验优化的特性和功能，
 
 纯前端项目，没有登录注册、信息收集，也没有收费项目。
-
-在线使用：https://resume.whitemeta.cn/
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.8-blue.svg)
