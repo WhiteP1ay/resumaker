@@ -49,7 +49,7 @@ export const positionAtom = atom(
   }
 );
 
-// Action atoms
+// 原子操作
 export const showMessageAtom = atom(
   null,
   (get, set, 
