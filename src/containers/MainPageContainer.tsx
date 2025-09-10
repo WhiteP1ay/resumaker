@@ -1,13 +1,15 @@
 import { AppHeader } from '@/components/layout/AppHeader';
 import { ResumeDisplay } from '@/components/ResumeDisplay';
 import { useAtomValue, useSetAtom } from 'jotai';
-import React, { Suspense, useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 // import { LayoutSelector } from '@/components/LayoutSelector'
 import { ClearConfirmDialog } from '@/components/dialogs/ClearConfirmDialog';
 import { ActionButtons } from '@/components/layout/ActionButtons';
 import { AppFooter } from '@/components/layout/AppFooter';
 import { resetResumeAtom, resumeAtom } from '@/store/resumeStore';
 import { ResumeManagerDialog } from '@/components/dialogs/ResumeManagerDialog';
+import { FloatingMessage } from '@/components/ui/floating-message.tsx';
+import { useFloatingMessage } from '@/hooks/useFloatingMessage.ts';
 
 // 懒加载模块管理器（无loading，包很小会一闪而过）
 const SectionManager = React.lazy(() => import('@/components/dialogs/TimelineManagerDialog'));
@@ -18,6 +20,13 @@ export const MainPageContainer = () => {
   const [showClearDialog, setShowClearDialog] = useState(false);
   const [showTimelineManager, setShowTimelineManager] = useState(false);
   const [showResumeManager, setShowResumeManager] = useState(false);
+
+  const { isVisible, message, variant, position, hideMessage, autoClose, autoCloseDelay } =
+    useFloatingMessage();
+
+  useEffect(() => {
+    console.log('FloatingMessage:', { isVisible, message, variant, position });
+  }, [isVisible]);
 
   const handlePreview = () => {
     window.open('/preview', '_blank');
@@ -41,47 +50,63 @@ export const MainPageContainer = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50">
-      <AppHeader>
-        {/* <LayoutSelector
+    <>
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50">
+        <AppHeader>
+          {/* <LayoutSelector
           onLayoutChange={handleLayoutChange}
         /> */}
-        <ActionButtons
-          onPreview={handlePreview}
-          onClear={() => setShowClearDialog(true)}
-          onManageTimeline={handleManageTimeline}
-          onManageResumes={handleManageResumes}
-        />
-      </AppHeader>
-
-      <main className="max-w-6xl mx-auto p-4">
-        <ResumeDisplay
-          resume={resume}
-          isEditable={true}
-          className="bg-gradient-to-br from-gray-50 to-blue-50 min-h-screen"
-        />
-      </main>
-
-      <ClearConfirmDialog
-        isOpen={showClearDialog}
-        onClose={() => setShowClearDialog(false)}
-        onConfirm={handleClear}
-      />
-
-      {/* 懒加载模块管理器（无loading避免闪烁） */}
-      {showTimelineManager && (
-        <Suspense fallback={null}>
-          <SectionManager
-            isOpen={showTimelineManager}
-            onClose={() => setShowTimelineManager(false)}
+          <ActionButtons
+            onPreview={handlePreview}
+            onClear={() => setShowClearDialog(true)}
+            onManageTimeline={handleManageTimeline}
+            onManageResumes={handleManageResumes}
           />
-        </Suspense>
-      )}
+        </AppHeader>
 
-      {/* 简历管理对话框 */}
-      <ResumeManagerDialog isOpen={showResumeManager} onClose={() => setShowResumeManager(false)} />
+        <main className="max-w-6xl mx-auto p-4">
+          <ResumeDisplay
+            resume={resume}
+            isEditable={true}
+            className="bg-gradient-to-br from-gray-50 to-blue-50 min-h-screen"
+          />
+        </main>
 
-      <AppFooter />
-    </div>
+        <ClearConfirmDialog
+          isOpen={showClearDialog}
+          onClose={() => setShowClearDialog(false)}
+          onConfirm={handleClear}
+        />
+
+        {/* 懒加载模块管理器（无loading避免闪烁） */}
+        {showTimelineManager && (
+          <Suspense fallback={null}>
+            <SectionManager
+              isOpen={showTimelineManager}
+              onClose={() => setShowTimelineManager(false)}
+            />
+          </Suspense>
+        )}
+
+        {/* 简历管理对话框 */}
+        <ResumeManagerDialog
+          isOpen={showResumeManager}
+          onClose={() => setShowResumeManager(false)}
+        />
+
+        <AppFooter />
+      </div>
+
+      {/* 浮动消息 */}
+      <FloatingMessage
+        message={message}
+        isVisible={isVisible}
+        variant={variant}
+        position={position}
+        onClose={hideMessage}
+        autoClose={autoClose}
+        autoCloseDelay={autoCloseDelay}
+      />
+    </>
   );
 };

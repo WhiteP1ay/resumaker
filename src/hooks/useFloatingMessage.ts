@@ -1,4 +1,16 @@
-import { useState, useCallback } from 'react';
+import { useAtom, useAtomValue, useSetAtom } from 'jotai';
+import {
+  isVisibleAtom,
+  messageAtom,
+  variantAtom,
+  positionAtom,
+  showMessageAtom,
+  hideMessageAtom,
+  showInfoAtom,
+  showSuccessAtom,
+  showWarningAtom,
+  showErrorAtom,
+} from '../store/floatingMessageStore';
 
 interface UseFloatingMessageOptions {
   autoClose?: boolean;
@@ -13,41 +25,24 @@ export const useFloatingMessage = (options: UseFloatingMessageOptions = {}) => {
     defaultVisible = false,
   } = options;
 
-  const [isVisible, setIsVisible] = useState(defaultVisible);
-  const [message, setMessage] = useState('');
-  const [variant, setVariant] = useState<'default' | 'info' | 'success' | 'warning' | 'error'>('default');
-  const [position, setPosition] = useState<'top-right' | 'top-left' | 'bottom-right' | 'bottom-left' | 'top-center' | 'bottom-center'>('top-center');
+  // 使用Jotai原子来管理状态
+  const [isVisible, setIsVisible] = useAtom(isVisibleAtom);
+  const message = useAtomValue(messageAtom);
+  const variant = useAtomValue(variantAtom);
+  const position = useAtomValue(positionAtom);
 
-  const showMessage = useCallback((
-    newMessage: string,
-    messageVariant: 'default' | 'info' | 'success' | 'warning' | 'error' = 'default',
-    messagePosition: 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left' | 'top-center' | 'bottom-center' = 'top-center'
-  ) => {
-    setMessage(newMessage);
-    setVariant(messageVariant);
-    setPosition(messagePosition);
+  // 使用Jotai原子进行操作
+  const showMessage = useSetAtom(showMessageAtom);
+  const hideMessage = useSetAtom(hideMessageAtom);
+  const showInfo = useSetAtom(showInfoAtom);
+  const showSuccess = useSetAtom(showSuccessAtom);
+  const showWarning = useSetAtom(showWarningAtom);
+  const showError = useSetAtom(showErrorAtom);
+
+  // 如果默认可见，则设置初始可见性
+  if (defaultVisible && !isVisible) {
     setIsVisible(true);
-  }, []);
-
-  const hideMessage = useCallback(() => {
-    setIsVisible(false);
-  }, []);
-
-  const showInfo = useCallback((msg: string, pos?: 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left' | 'top-center' | 'bottom-center') => {
-    showMessage(msg, 'info', pos);
-  }, [showMessage]);
-
-  const showSuccess = useCallback((msg: string, pos?: 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left' | 'top-center' | 'bottom-center') => {
-    showMessage(msg, 'success', pos);
-  }, [showMessage]);
-
-  const showWarning = useCallback((msg: string, pos?: 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left' | 'top-center' | 'bottom-center') => {
-    showMessage(msg, 'warning', pos);
-  }, [showMessage]);
-
-  const showError = useCallback((msg: string, pos?: 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left' | 'top-center' | 'bottom-center') => {
-    showMessage(msg, 'error', pos);
-  }, [showMessage]);
+  }
 
   return {
     isVisible,

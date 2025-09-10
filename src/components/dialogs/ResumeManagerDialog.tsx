@@ -8,7 +8,6 @@ import {
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { FloatingMessage } from '@/components/ui/floating-message';
 import { useResumeManager } from '@/hooks/useResumeManager';
 import { useFloatingMessage } from '@/hooks/useFloatingMessage';
 import type { ResumeMetadata } from '@/types/resume';
@@ -55,16 +54,7 @@ export const ResumeManagerDialog = ({ isOpen, onClose }: ResumeManagerDialogProp
     importBatchResumes,
   } = useResumeManager();
 
-  const {
-    showMessage,
-    isVisible,
-    message,
-    variant,
-    position,
-    hideMessage,
-    autoClose,
-    autoCloseDelay,
-  } = useFloatingMessage();
+  const { showMessage } = useFloatingMessage();
 
   const [editingResume, setEditingResume] = useState<EditingResume | null>(null);
   const [isCreating, setIsCreating] = useState(false);
@@ -671,17 +661,6 @@ export const ResumeManagerDialog = ({ isOpen, onClose }: ResumeManagerDialogProp
           </div>
         </DialogContent>
       </Dialog>
-
-      {/* 浮动消息 - 移出Dialog避免被遮挡 */}
-      <FloatingMessage
-        message={message}
-        isVisible={isVisible}
-        variant={variant}
-        position={position}
-        onClose={hideMessage}
-        autoClose={autoClose}
-        autoCloseDelay={autoCloseDelay}
-      />
     </>
   );
 };

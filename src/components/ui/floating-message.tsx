@@ -77,6 +77,7 @@ const FloatingMessage = React.forwardRef<HTMLDivElement, FloatingMessageProps>(
         if (autoClose) {
           const timer = setTimeout(() => {
             handleClose();
+            console.log('关闭消息:', message);
           }, autoCloseDelay);
 
           return () => clearTimeout(timer);
