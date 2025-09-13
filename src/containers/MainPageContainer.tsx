@@ -2,7 +2,7 @@ import { AppHeader } from '@/components/layout/AppHeader';
 import { ResumeDisplay } from '@/components/ResumeDisplay';
 import { ResumeSidebar } from '@/components/layout/ResumeSidebar.tsx';
 import { useAtomValue, useSetAtom } from 'jotai';
-import React, { Suspense, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ClearConfirmDialog } from '@/components/dialogs/ClearConfirmDialog';
 import { ActionButtons } from '@/components/layout/ActionButtons';
 import { AppFooter } from '@/components/layout/AppFooter';
@@ -11,14 +11,13 @@ import { ResumeManagerDialog } from '@/components/dialogs/ResumeManagerDialog';
 import { FloatingMessage } from '@/components/ui/floating-message.tsx';
 import { useFloatingMessage } from '@/hooks/useFloatingMessage.ts';
 
-// 懒加载模块管理器（无loading，包很小会一闪而过）
-const SectionManager = React.lazy(() => import('@/components/dialogs/TimelineManagerDialog'));
+// 移除懒加载模块管理器，现在使用独立页面
 
 export const MainPageContainer = () => {
   const resume = useAtomValue(resumeAtom);
   const resetResume = useSetAtom(resetResumeAtom);
   const [showClearDialog, setShowClearDialog] = useState(false);
-  const [showTimelineManager, setShowTimelineManager] = useState(false);
+  // 移除showTimelineManager状态，现在使用独立页面
   const [showResumeManager, setShowResumeManager] = useState(false);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
@@ -38,9 +37,7 @@ export const MainPageContainer = () => {
     setShowClearDialog(false);
   };
 
-  const handleManageTimeline = () => {
-    setShowTimelineManager(true);
-  };
+  // 移除handleManageTimeline，现在使用路由导航
 
   const handleManageResumes = () => {
     setShowResumeManager(true);
@@ -57,7 +54,6 @@ export const MainPageContainer = () => {
           <ActionButtons
             onPreview={handlePreview}
             onClear={() => setShowClearDialog(true)}
-            onManageTimeline={handleManageTimeline}
             onManageResumes={handleManageResumes}
           />
         </AppHeader>
@@ -89,15 +85,7 @@ export const MainPageContainer = () => {
           onConfirm={handleClear}
         />
 
-        {/* 懒加载模块管理器（无loading避免闪烁） */}
-        {showTimelineManager && (
-          <Suspense fallback={null}>
-            <SectionManager
-              isOpen={showTimelineManager}
-              onClose={() => setShowTimelineManager(false)}
-            />
-          </Suspense>
-        )}
+        {/* 移除模块管理对话框，现在使用独立页面 */}
 
         {/* 简历管理对话框 */}
         <ResumeManagerDialog

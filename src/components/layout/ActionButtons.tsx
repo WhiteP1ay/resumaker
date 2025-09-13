@@ -3,21 +3,25 @@ import { Button } from '@/components/ui/button';
 import { AIPlatformDropdown } from '@/components/AIPlatformDropdown';
 import { AIPlatformManagerDialog } from '@/components/dialogs/AIPlatformManagerDialog';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface ActionButtonsProps {
   onPreview: () => void;
   onClear: () => void;
-  onManageTimeline: () => void;
   onManageResumes: () => void;
 }
 
 export const ActionButtons = ({
   onPreview,
   onClear,
-  onManageTimeline,
   onManageResumes,
 }: ActionButtonsProps) => {
   const [isAIPlatformDialogOpen, setIsAIPlatformDialogOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const handleManageSections = () => {
+    navigate('/sections');
+  };
 
   return (
     <>
@@ -32,7 +36,7 @@ export const ActionButtons = ({
       </Button>
 
       <Button
-        onClick={onManageTimeline}
+        onClick={handleManageSections}
         variant="outline"
         size="sm"
         className="flex items-center space-x-2 text-blue-600 hover:text-blue-700 hover:bg-blue-50"
