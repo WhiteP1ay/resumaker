@@ -1,5 +1,5 @@
 import { FileText, Sparkles } from 'lucide-react';
-import { MobileResumeDrawer, MobileResumeSwitcher } from '@/components/mobile/MobileResumeDrawer';
+import { MobileResumeDrawer, MobileResumeSwitcher } from '@/components/resume-switcher/MobileResumeDrawer.tsx';
 import { useState } from 'react';
 
 interface AppHeaderProps {

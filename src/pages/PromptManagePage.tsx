@@ -1,7 +1,6 @@
 import { useMemo, useState } from 'react';
 import { useAtom, useAtomValue } from 'jotai';
-import { ArrowLeft, Plus, Search } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { Plus, Search } from 'lucide-react';
 import MiniSearch from 'minisearch';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -20,7 +19,6 @@ import { DeletePromptConfirmDialog } from '@/components/dialogs/DeletePromptConf
 import { useFloatingMessage } from '@/hooks/useFloatingMessage';
 
 export const PromptManagePage = () => {
-  const navigate = useNavigate();
   const prompts = useAtomValue(promptsAtom);
   const [searchKeyword, setSearchKeyword] = useAtom(searchKeywordAtom);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -105,7 +103,7 @@ export const PromptManagePage = () => {
   };
 
   const handleDeletePrompt = (promptId: string) => {
-    const prompt = prompts.find(p => p.id === promptId);
+    const prompt = prompts.find((p) => p.id === promptId);
     if (prompt) {
       setDeleteConfirm({
         isOpen: true,
@@ -152,15 +150,6 @@ export const PromptManagePage = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center space-x-4">
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => navigate(-1)}
-                className="text-gray-600 hover:text-gray-900"
-              >
-                <ArrowLeft className="h-4 w-4 mr-2" />
-                返回
-              </Button>
               <h1 className="text-xl font-semibold text-gray-900">简历优化提示词管理</h1>
             </div>
             <Button onClick={handleAddPrompt} className="bg-blue-600 hover:bg-blue-700">

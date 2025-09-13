@@ -4,7 +4,7 @@ import { useSectionManager } from '@/hooks/components/useSectionManager';
 import { DndContext } from '@dnd-kit/core';
 import { SortableContext } from '@dnd-kit/sortable';
 import { GripVertical, Plus, Star } from 'lucide-react';
-import { DraggableSectionItem } from '@/components/dialogs/DraggableSectionItem';
+import { DraggableSectionItem } from '@/components/section-manager/DraggableSectionItem.tsx';
 
 export const SectionEditorPanel = () => {
   const {

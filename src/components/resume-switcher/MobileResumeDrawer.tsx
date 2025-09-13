@@ -1,10 +1,10 @@
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { useResumeManager } from '@/hooks/useResumeManager';
+import { Button } from '@/components/ui/button.tsx';
+import { Input } from '@/components/ui/input.tsx';
+import { useResumeManager } from '@/hooks/useResumeManager.ts';
 import { FileText, Menu, Plus, Search, X } from 'lucide-react';
 import MiniSearch from 'minisearch';
 import { useMemo, useState } from 'react';
-import type { ResumeMetadata } from '@/types/resume';
+import type { ResumeMetadata } from '@/types/resume.ts';
 
 interface MobileResumeDrawerProps {
   isOpen: boolean;
