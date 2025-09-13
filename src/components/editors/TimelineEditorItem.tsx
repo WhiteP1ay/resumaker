@@ -118,9 +118,8 @@ export const TimelineEditorItem = ({
         <Label className="text-sm font-medium text-gray-700">详细描述</Label>
         <Textarea
           value={item.description}
-          onChange={(e) => onUpdate(item.id, 'description', e.target.value)}
+          onChange={(value) => onUpdate(item.id, 'description', value)}
           placeholder="详细描述工作内容、学习经历或项目经验..."
-          rows={4}
           className="transition-all duration-200 focus:ring-2 focus:ring-blue-500"
         />
       </div>

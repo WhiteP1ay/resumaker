@@ -1,17 +1,42 @@
-import { Eye, Trash2, Settings } from 'lucide-react';
+import { Eye, FolderOpen, Settings, Trash2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { AIPlatformDropdown } from '@/components/AIPlatformDropdown';
+import { AIPlatformManagerDialog } from '@/components/dialogs/AIPlatformManagerDialog';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface ActionButtonsProps {
   onPreview: () => void;
   onClear: () => void;
-  onManageTimeline: () => void;
+  onManageResumes: () => void;
 }
 
-export const ActionButtons = ({ onPreview, onClear, onManageTimeline }: ActionButtonsProps) => {
+export const ActionButtons = ({
+  onPreview,
+  onClear,
+  onManageResumes,
+}: ActionButtonsProps) => {
+  const [isAIPlatformDialogOpen, setIsAIPlatformDialogOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const handleManageSections = () => {
+    navigate('/sections');
+  };
+
   return (
     <>
       <Button
-        onClick={onManageTimeline}
+        onClick={onManageResumes}
+        variant="outline"
+        size="sm"
+        className="flex items-center space-x-2 text-green-600 hover:text-green-700 hover:bg-green-50"
+      >
+        <FolderOpen className="h-4 w-4" />
+        <span className="hidden sm:inline">简历管理</span>
+      </Button>
+
+      <Button
+        onClick={handleManageSections}
         variant="outline"
         size="sm"
         className="flex items-center space-x-2 text-blue-600 hover:text-blue-700 hover:bg-blue-50"
@@ -37,10 +62,21 @@ export const ActionButtons = ({ onPreview, onClear, onManageTimeline }: ActionBu
         className="flex items-center space-x-2 text-red-600 hover:text-red-700 hover:bg-red-50"
       >
         <Trash2 className="h-4 w-4" />
-        <span className="hidden sm:inline">清空</span>
+        <span className="hidden sm:inline">重置</span>
       </Button>
 
-      <div className="hidden lg:block text-xs text-gray-500">💡 点击模块右上角编辑按钮修改内容</div>
+      {/* 常用AI工具平台 */}
+      <div className="hidden lg:block">
+        <AIPlatformDropdown 
+          onManagePlatforms={() => setIsAIPlatformDialogOpen(true)} 
+        />
+      </div>
+
+      {/* AI平台管理对话框 */}
+      <AIPlatformManagerDialog
+        isOpen={isAIPlatformDialogOpen}
+        onClose={() => setIsAIPlatformDialogOpen(false)}
+      />
     </>
   );
 };

@@ -8,6 +8,16 @@ const PreviewPage = React.lazy(() =>
   import('./pages/PreviewPage').then((module) => ({ default: module.PreviewPage }))
 );
 
+// 懒加载提示词管理页面
+const PromptManagePage = React.lazy(() =>
+  import('./pages/PromptManagePage').then((module) => ({ default: module.PromptManagePage }))
+);
+
+// 懒加载模块管理页面
+const SectionManagerPage = React.lazy(() =>
+  import('./pages/SectionManagerPage').then((module) => ({ default: module.SectionManagerPage }))
+);
+
 function App() {
   return (
     <Provider>
@@ -19,6 +29,22 @@ function App() {
             element={
               <Suspense fallback={null}>
                 <PreviewPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/prompts"
+            element={
+              <Suspense fallback={null}>
+                <PromptManagePage />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/sections"
+            element={
+              <Suspense fallback={null}>
+                <SectionManagerPage />
               </Suspense>
             }
           />

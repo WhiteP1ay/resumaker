@@ -1,15 +1,15 @@
-import { IconPicker } from '@/components/IconPicker';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Select } from '@/components/ui/select';
+import { IconPicker } from '@/components/IconPicker.tsx';
+import { Button } from '@/components/ui/button.tsx';
+import { Input } from '@/components/ui/input.tsx';
+import { Label } from '@/components/ui/label.tsx';
+import { Select } from '@/components/ui/select.tsx';
 
-import type { ResumeSection } from '@/types/resume';
+import type { ResumeSection } from '@/types/resume.ts';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { Check, Edit, GripVertical, Trash2, X } from 'lucide-react';
 import React from 'react';
-import { EDITOR_TYPE_OPTIONS } from './editorTypeConstants';
+import { EDITOR_TYPE_OPTIONS } from './editorTypeConstants.ts';
 
 export interface DraggableSectionItemProps {
   section: ResumeSection;

@@ -28,9 +28,11 @@
     "jotai": "^2.12.5",
     "lodash.debounce": "^4.0.8",
     "lucide-react": "^0.535.0",
-    "react": "^19.1.1",
-    "react-dom": "^19.1.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "react-image-crop": "^11.0.10",
+    "react-minisearch": "^7.1.4",
+    "react-quill": "^2.0.0",
     "react-router-dom": "^7.7.1",
     "tailwind-merge": "^3.3.1"
   },
