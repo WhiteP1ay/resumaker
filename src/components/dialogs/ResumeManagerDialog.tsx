@@ -618,13 +618,6 @@ export const ResumeManagerDialog = ({ isOpen, onClose }: ResumeManagerDialogProp
               ))}
             </div>
           </div>
-
-          {/* 关闭按钮 */}
-          <div className="flex justify-end pt-4 border-t border-gray-200">
-            <Button variant="outline" onClick={onClose}>
-              关闭
-            </Button>
-          </div>
         </DialogContent>
       </Dialog>
 
