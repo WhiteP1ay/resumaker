@@ -41,10 +41,9 @@ export const ListEditorItem = ({ item, index, onUpdate, onRemove }: ListEditorIt
       <div className="flex-1">
         <Textarea
           value={item.content}
-          onChange={(e) => onUpdate(item.id, e.target.value)}
+          onChange={(value) => onUpdate(item.id, value)}
           placeholder={`请输入第 ${index + 1} 项内容...`}
           className="min-h-[80px] resize-none"
-          rows={3}
         />
       </div>
 

@@ -87,7 +87,7 @@ export const TextEditor = ({
             </div>
             <Textarea
               value={content}
-              onChange={(e) => setContent(e.target.value)}
+              onChange={(value) => setContent(value)}
               placeholder="请输入内容..."
               className="min-h-[200px] resize-y"
             />

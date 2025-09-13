@@ -69,7 +69,7 @@ export const initialResume: Resume = {
       order: 2,
       data: {
         content:
-          '1. 熟练使用 html5 + css3 技术\n2. 熟练掌握 javascript (es6+) 和 Vue  技术栈,并深入了解其原理。\n3. 丰富的大型网站开发经验，对前端工程化，性能优化有丰富的实战经验。\n4. 熟练掌握 Typescript，SCSS 。\n5. 擅长 webpack  配置与前端架构设计。\n6. 熟悉 node.js ，包括 express/koa  等服务端框架',
+          '<ol><li>熟练使用 <strong>HTML5</strong> + <strong>CSS3</strong> 技术</li><li>熟练掌握 <strong>JavaScript (ES6+)</strong> 和 <strong>Vue</strong> 技术栈，并深入了解其原理</li><li>丰富的大型网站开发经验，对前端工程化，性能优化有丰富的实战经验</li><li>熟练掌握 <strong>TypeScript</strong>，<strong>SCSS</strong></li><li>擅长 <strong>Webpack</strong> 配置与前端架构设计</li><li>熟悉 <strong>Node.js</strong>，包括 <strong>Express</strong>/<strong>Koa</strong> 等服务端框架</li></ol>',
       },
     },
     {
@@ -83,7 +83,7 @@ export const initialResume: Resume = {
       data: [
         {
           description:
-            '一个基于 React 19 构建的现代化在线简历编辑器，提供所见即所得的编辑体验。\n- 为了更轻量、更容易定制，组件库选择了Shadcn/UI \n- 构建工具选择了 Vite 并优化了首屏加载性能，总资源小于1MB\n- 基于 Docker + GithubAction 实现全自动 CI/CD\n- 这份项目是开源的，地址 https://github.com/WhiteP1ay/resumaker\n- 这份简历就是通过这个编辑工具制作出来的',
+            '<p>一个基于 <strong>React 19</strong> 构建的现代化在线简历编辑器，提供所见即所得的编辑体验。</p><ul><li>为了更轻量、更容易定制，组件库选择了 <strong>Shadcn/UI</strong></li><li>构建工具选择了 <strong>Vite</strong> 并优化了首屏加载性能，总资源小于1MB</li><li>基于 <strong>Docker</strong> + <strong>GithubAction</strong> 实现全自动 CI/CD</li><li>这份项目是开源的，地址 <a href="https://github.com/WhiteP1ay/resumaker" target="_blank" rel="noopener noreferrer">https://github.com/WhiteP1ay/resumaker</a></li><li>这份简历就是通过这个编辑工具制作出来的</li></ul>',
           endDate: '',
           id: '1756977218779',
           secondarySubtitle: 'resume.whitemeta.cn',
@@ -99,7 +99,7 @@ export const initialResume: Resume = {
           startDate: '',
           endDate: '',
           description:
-            '一个基于 Next 15 构建的博客网站\n- 良好的SEO，Google搜索"whitemeta"，本站排名第一\n- 基于TailwindCSS 实现 PC & H5 双端适配\n- 基于Google Analytics 实现全站流量统计\n- 当然博客网站最重要的还是内容，希望您能通过博文来更全面了解我',
+            '<p>一个基于 <strong>Next 15</strong> 构建的博客网站</p><ul><li>良好的SEO，Google搜索"whitemeta"，本站排名第一</li><li>基于 <strong>TailwindCSS</strong> 实现 PC & H5 双端适配</li><li>基于 <strong>Google Analytics</strong> 实现全站流量统计</li><li>当然博客网站最重要的还是内容，希望您能通过博文来更全面了解我</li></ul>',
         },
       ],
     },

@@ -12,7 +12,10 @@ export const ListContent = ({ data }: ListContentProps) => (
     {data.map((item, index) => (
       <div key={item.id} className="flex items-start space-x-3">
         <span className="text-sm font-medium mt-0.5 shrink-0">{index + 1}.</span>
-        <span className="text-sm text-gray-700 leading-relaxed">{item.content}</span>
+        <span
+          className="text-sm text-gray-700 leading-relaxed [&_ul]:list-disc [&_ul]:pl-4 [&_ol]:list-decimal [&_ol]:pl-4 [&_li]:mb-1"
+          dangerouslySetInnerHTML={{ __html: item.content }}
+        />
       </div>
     ))}
   </div>
@@ -44,9 +47,10 @@ export const TimelineContent = ({ data }: TimelineContentProps) => (
         </div>
 
         {item.description && (
-          <div className="text-sm text-gray-700 leading-relaxed whitespace-pre-line pl-0 mt-2 print:mt-1">
-            {item.description}
-          </div>
+          <div
+            className="text-sm text-gray-700 leading-relaxed whitespace-pre-line pl-0 mt-2 print:mt-1 [&_ul]:list-disc [&_ul]:pl-4 [&_ol]:list-decimal [&_ol]:pl-4 [&_li]:mb-1"
+            dangerouslySetInnerHTML={{ __html: item.description }}
+          />
         )}
       </div>
     ))}
@@ -58,5 +62,8 @@ interface TextContentRendererProps {
 }
 
 export const TextContentRenderer = ({ data }: TextContentRendererProps) => (
-  <div className="text-sm text-gray-700 leading-relaxed whitespace-pre-line">{data.content}</div>
+  <div
+    className="text-sm text-gray-700 leading-relaxed whitespace-pre-line [&_ul]:list-disc [&_ul]:pl-4 [&_ol]:list-decimal [&_ol]:pl-4 [&_li]:mb-1"
+    dangerouslySetInnerHTML={{ __html: data.content }}
+  />
 );
