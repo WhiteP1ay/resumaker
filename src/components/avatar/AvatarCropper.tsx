@@ -46,7 +46,7 @@ export const AvatarCropper = ({
         </DialogHeader>
 
         <div className="space-y-4">
-          <div className="flex justify-center">
+          <div className="flex justify-center overflow-auto max-h-[60vh]">
             <ReactCrop
               crop={crop}
               onChange={onCropChange}
@@ -58,7 +58,7 @@ export const AvatarCropper = ({
                 src={imageSrc}
                 alt="裁剪头像"
                 onLoad={onImageLoad}
-                className="max-h-96"
+                style={{ maxHeight: '55vh', maxWidth: '100%' }}
               />
             </ReactCrop>
           </div>
