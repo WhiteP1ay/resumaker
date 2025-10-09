@@ -6,7 +6,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
-import { Textarea } from '@/components/ui/textarea';
+import { RichTextEditor } from '@/components/ui/rich-text-editor';
 import { useTextEditor } from '@/hooks/components/useTextEditor';
 
 interface TextEditorProps {
@@ -85,11 +85,11 @@ export const TextEditor = ({
                 {wordCount} 字符 · {lineCount} 行
               </div>
             </div>
-            <Textarea
+            <RichTextEditor
               value={content}
-              onChange={(e) => setContent(e.target.value)}
+              onChange={setContent}
               placeholder="请输入内容..."
-              className="min-h-[200px] resize-y"
+              minHeight="200px"
             />
           </div>
         </div>

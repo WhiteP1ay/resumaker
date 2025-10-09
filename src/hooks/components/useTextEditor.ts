@@ -48,10 +48,15 @@ export const useTextEditor = (
     setData({ ...data, iconEnabled: enabled });
   };
 
-  // 计算字数和行数
+  // 计算字数和行数（去除 HTML 标签后的纯文本）
   const { wordCount, lineCount } = useMemo(() => {
-    const wordCount = content.length;
-    const lineCount = content.split('\n').length;
+    // 将 HTML 转换为纯文本
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = content;
+    const plainText = tempDiv.textContent || tempDiv.innerText || '';
+
+    const wordCount = plainText.length;
+    const lineCount = plainText.split('\n').length;
     return { wordCount, lineCount };
   }, [content]);
 

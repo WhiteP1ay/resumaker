@@ -1,10 +1,12 @@
 import { ClearConfirmDialog } from '@/components/dialogs/ClearConfirmDialog';
 import { ResumeSettingsDialog } from '@/components/dialogs/ResumeSettingsDialog';
+import { RichTextMigrationDialog } from '@/components/dialogs/RichTextMigrationDialog';
 import { ActionButtons } from '@/components/layout/ActionButtons';
 import { AppFooter } from '@/components/layout/AppFooter';
 import { AppHeader } from '@/components/layout/AppHeader';
 import { ResumeDisplay } from '@/components/ResumeDisplay';
 import { useResumeActions } from '@/hooks/useResumeActions';
+import { useRichTextMigration } from '@/hooks/useRichTextMigration';
 import { resumeAtom } from '@/store/resumeStore';
 import { useAtomValue } from 'jotai';
 import { useState } from 'react';
@@ -12,6 +14,7 @@ import { useState } from 'react';
 export const MainPageContainer = () => {
   const resume = useAtomValue(resumeAtom);
   const { clearResume } = useResumeActions();
+  const { needsMigration, migrate, cancelMigration } = useRichTextMigration();
   const [showClearDialog, setShowClearDialog] = useState(false);
   const [showResumeSettings, setShowResumeSettings] = useState(false);
 
@@ -51,6 +54,12 @@ export const MainPageContainer = () => {
       <ResumeSettingsDialog
         isOpen={showResumeSettings}
         onClose={() => setShowResumeSettings(false)}
+      />
+
+      <RichTextMigrationDialog
+        isOpen={needsMigration}
+        onConfirm={migrate}
+        onCancel={cancelMigration}
       />
 
       <AppFooter />

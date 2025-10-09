@@ -95,3 +95,298 @@
     overflow: visible;
   }
 }
+
+/* 富文本显示样式 */
+.rich-text-display {
+  /* 重置 Quill 的默认样式 */
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+}
+
+/* 字体大小样式 */
+.rich-text-display .ql-size-small {
+  font-size: 0.75em;
+}
+
+.rich-text-display .ql-size-large {
+  font-size: 1.5em;
+}
+
+.rich-text-display .ql-size-huge {
+  font-size: 2em;
+}
+
+/* 标题样式 */
+.rich-text-display h1 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-top: 0.75rem;
+  margin-bottom: 0.5rem;
+  color: rgb(31 41 55);
+}
+
+.rich-text-display h2 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-top: 0.75rem;
+  margin-bottom: 0.5rem;
+  color: rgb(31 41 55);
+}
+
+.rich-text-display h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 0.5rem;
+  margin-bottom: 0.375rem;
+  color: rgb(31 41 55);
+}
+
+/* 段落样式 */
+.rich-text-display p {
+  margin-bottom: 0.5rem;
+}
+
+.rich-text-display p:last-child {
+  margin-bottom: 0;
+}
+
+/* 文本样式 */
+.rich-text-display strong {
+  font-weight: 600;
+  color: rgb(31 41 55);
+}
+
+.rich-text-display em {
+  font-style: italic;
+}
+
+.rich-text-display u {
+  text-decoration: underline;
+}
+
+.rich-text-display s {
+  text-decoration: line-through;
+}
+
+/* 列表样式 */
+.rich-text-display ul,
+.rich-text-display ol {
+  margin-left: 1.5rem;
+  margin-bottom: 0.5rem;
+  padding-left: 0;
+}
+
+.rich-text-display ul {
+  list-style-type: disc;
+}
+
+.rich-text-display ol {
+  list-style-type: decimal;
+}
+
+.rich-text-display li {
+  margin-bottom: 0.25rem;
+}
+
+.rich-text-display li:last-child {
+  margin-bottom: 0;
+}
+
+/* 嵌套列表 */
+.rich-text-display ul ul,
+.rich-text-display ol ul {
+  list-style-type: circle;
+  margin-top: 0.25rem;
+}
+
+.rich-text-display ul ol,
+.rich-text-display ol ol {
+  list-style-type: lower-alpha;
+  margin-top: 0.25rem;
+}
+
+/* 链接样式 */
+.rich-text-display a {
+  color: rgb(59 130 246);
+  text-decoration: underline;
+}
+
+.rich-text-display a:hover {
+  color: rgb(37 99 235);
+}
+
+/* 缩进样式 - 与 Quill 编辑器保持一致 */
+.rich-text-display .ql-indent-1 {
+  padding-left: 3em;
+}
+
+.rich-text-display .ql-indent-2 {
+  padding-left: 6em;
+}
+
+.rich-text-display .ql-indent-3 {
+  padding-left: 9em;
+}
+
+.rich-text-display .ql-indent-4 {
+  padding-left: 12em;
+}
+
+.rich-text-display .ql-indent-5 {
+  padding-left: 15em;
+}
+
+.rich-text-display .ql-indent-6 {
+  padding-left: 18em;
+}
+
+.rich-text-display .ql-indent-7 {
+  padding-left: 21em;
+}
+
+.rich-text-display .ql-indent-8 {
+  padding-left: 24em;
+}
+
+/* 对齐样式 */
+.rich-text-display .ql-align-center {
+  text-align: center;
+}
+
+.rich-text-display .ql-align-right {
+  text-align: right;
+}
+
+.rich-text-display .ql-align-justify {
+  text-align: justify;
+}
+
+/* 列表缩进 - 使用 margin-left 而不是 padding-left，避免标记位置错误 */
+.rich-text-display li.ql-indent-1 {
+  margin-left: 3em;
+  padding-left: 0;
+}
+
+.rich-text-display li.ql-indent-2 {
+  margin-left: 6em;
+  padding-left: 0;
+}
+
+.rich-text-display li.ql-indent-3 {
+  margin-left: 9em;
+  padding-left: 0;
+}
+
+.rich-text-display li.ql-indent-4 {
+  margin-left: 12em;
+  padding-left: 0;
+}
+
+.rich-text-display li.ql-indent-5 {
+  margin-left: 15em;
+  padding-left: 0;
+}
+
+.rich-text-display li.ql-indent-6 {
+  margin-left: 18em;
+  padding-left: 0;
+}
+
+.rich-text-display li.ql-indent-7 {
+  margin-left: 21em;
+  padding-left: 0;
+}
+
+.rich-text-display li.ql-indent-8 {
+  margin-left: 24em;
+  padding-left: 0;
+}
+
+/* 打印时的样式调整 */
+@media print {
+  .rich-text-display h1,
+  .rich-text-display h2,
+  .rich-text-display h3 {
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .rich-text-display p {
+    margin-bottom: 0.25rem;
+  }
+
+  .rich-text-display ul,
+  .rich-text-display ol {
+    margin-bottom: 0.25rem;
+  }
+
+  .rich-text-display li {
+    margin-bottom: 0.125rem;
+  }
+
+  .rich-text-display a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  /* 打印时保持缩进样式 */
+  .rich-text-display .ql-indent-1 {
+    padding-left: 3em;
+  }
+  .rich-text-display .ql-indent-2 {
+    padding-left: 6em;
+  }
+  .rich-text-display .ql-indent-3 {
+    padding-left: 9em;
+  }
+  .rich-text-display .ql-indent-4 {
+    padding-left: 12em;
+  }
+  .rich-text-display .ql-indent-5 {
+    padding-left: 15em;
+  }
+  .rich-text-display .ql-indent-6 {
+    padding-left: 18em;
+  }
+  .rich-text-display .ql-indent-7 {
+    padding-left: 21em;
+  }
+  .rich-text-display .ql-indent-8 {
+    padding-left: 24em;
+  }
+
+  .rich-text-display li.ql-indent-1 {
+    margin-left: 3em;
+    padding-left: 0;
+  }
+  .rich-text-display li.ql-indent-2 {
+    margin-left: 6em;
+    padding-left: 0;
+  }
+  .rich-text-display li.ql-indent-3 {
+    margin-left: 9em;
+    padding-left: 0;
+  }
+  .rich-text-display li.ql-indent-4 {
+    margin-left: 12em;
+    padding-left: 0;
+  }
+  .rich-text-display li.ql-indent-5 {
+    margin-left: 15em;
+    padding-left: 0;
+  }
+  .rich-text-display li.ql-indent-6 {
+    margin-left: 18em;
+    padding-left: 0;
+  }
+  .rich-text-display li.ql-indent-7 {
+    margin-left: 21em;
+    padding-left: 0;
+  }
+  .rich-text-display li.ql-indent-8 {
+    margin-left: 24em;
+    padding-left: 0;
+  }
+}

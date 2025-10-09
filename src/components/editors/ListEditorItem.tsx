@@ -2,7 +2,7 @@
  * 可复用的列表项组件
  */
 import { Button } from '@/components/ui/button';
-import { Textarea } from '@/components/ui/textarea';
+import { RichTextEditor } from '@/components/ui/rich-text-editor';
 import type { ListItem as ListItemType } from '@/types/resume';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
@@ -39,12 +39,11 @@ export const ListEditorItem = ({ item, index, onUpdate, onRemove }: ListEditorIt
 
       {/* 内容输入框 */}
       <div className="flex-1">
-        <Textarea
+        <RichTextEditor
           value={item.content}
-          onChange={(e) => onUpdate(item.id, e.target.value)}
+          onChange={(value) => onUpdate(item.id, value)}
           placeholder={`请输入第 ${index + 1} 项内容...`}
-          className="min-h-[80px] resize-none"
-          rows={3}
+          minHeight="80px"
         />
       </div>
 

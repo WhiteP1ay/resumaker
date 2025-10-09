@@ -12,9 +12,10 @@ export const ListContent = ({ data }: ListContentProps) => (
     {data.map((item, index) => (
       <div key={item.id} className="flex items-start space-x-3">
         <span className="text-sm font-medium text-blue-600 mt-0.5 shrink-0">{index + 1}.</span>
-        <div className="text-sm text-gray-700 leading-relaxed">
-          <pre className="text-wrap">{item.content}</pre>
-        </div>
+        <div
+          className="text-sm text-gray-700 leading-relaxed rich-text-display flex-1"
+          dangerouslySetInnerHTML={{ __html: item.content }}
+        />
       </div>
     ))}
   </div>
@@ -50,9 +51,10 @@ export const TimelineContent = ({ data }: TimelineContentProps) => (
         </div>
 
         {item.description && (
-          <div className="text-sm text-gray-700 leading-relaxed whitespace-pre-wrap pl-0 mt-2 print:mt-1">
-            {item.description}
-          </div>
+          <div
+            className="text-sm text-gray-700 leading-relaxed pl-0 mt-2 print:mt-1 rich-text-display"
+            dangerouslySetInnerHTML={{ __html: item.description }}
+          />
         )}
       </div>
     ))}
@@ -64,5 +66,8 @@ interface TextContentRendererProps {
 }
 
 export const TextContentRenderer = ({ data }: TextContentRendererProps) => (
-  <div className="text-sm text-gray-700 leading-relaxed whitespace-pre-wrap">{data.content}</div>
+  <div
+    className="text-sm text-gray-700 leading-relaxed rich-text-display"
+    dangerouslySetInnerHTML={{ __html: data.content }}
+  />
 );

@@ -4,7 +4,7 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
+import { RichTextEditor } from '@/components/ui/rich-text-editor';
 import type { TimelineItem as TimelineItemType } from '@/types/resume';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
@@ -116,12 +116,11 @@ export const TimelineEditorItem = ({
 
       <div className="space-y-2">
         <Label className="text-sm font-medium text-gray-700">详细描述</Label>
-        <Textarea
+        <RichTextEditor
           value={item.description}
-          onChange={(e) => onUpdate(item.id, 'description', e.target.value)}
+          onChange={(value) => onUpdate(item.id, 'description', value)}
           placeholder="详细描述工作内容、学习经历或项目经验..."
-          rows={4}
-          className="transition-all duration-200 focus:ring-2 focus:ring-blue-500"
+          minHeight="150px"
         />
       </div>
     </div>
