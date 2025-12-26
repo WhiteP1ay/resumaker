@@ -16,7 +16,7 @@ export const MainPageContainer = () => {
   const [showResumeSettings, setShowResumeSettings] = useState(false);
 
   const handlePreview = () => {
-    window.open('/preview', '_blank');
+    window.open('/resume/preview', '_blank');
   };
 
   const handleClear = () => {
