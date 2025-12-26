@@ -90,7 +90,7 @@ const initialResume: Resume = {
             '<p>一个基于 <strong>React 19</strong> 构建的现代化在线简历编辑器，提供<span style="color: #3b82f6;">所见即所得</span>的编辑体验</p><ul><li>为了更轻量、更容易定制，组件库选择了 <strong>Shadcn/UI</strong></li><li>构建工具选择了 <strong>Vite</strong> 并优化了首屏加载性能，总资源小于 1MB</li><li>基于 <strong>Docker + GithubAction</strong> 实现全自动 CI/CD</li><li>这份项目是开源的，地址 <a href="https://github.com/WhiteP1ay/resumaker" target="_blank">https://github.com/WhiteP1ay/resumaker</a></li><li><em>这份简历就是通过这个编辑工具制作出来的</em></li></ul>',
           endDate: '',
           id: '1756977218779',
-          secondarySubtitle: 'resume.whitemeta.cn',
+          secondarySubtitle: 'whitemeta.cn/resume',
           startDate: '',
           subtitle: '全栈',
           title: '简历编辑器',

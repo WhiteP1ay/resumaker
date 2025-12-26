@@ -1,4 +1,4 @@
-name: 🚀 Deploy to Production
+name: 🐳 Build and Push Docker Image
 
 on:
   push:
@@ -10,8 +10,8 @@ env:
 
 jobs:
   # 构建和推送Docker镜像
-  build-and-deploy:
-    name: 🐳 Build & Deploy
+  build-and-push:
+    name: 🐳 Build & Push
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -49,42 +49,3 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
-
-      - name: 🚀 Deploy to Server
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.DEPLOY_HOST }}
-          username: ${{ secrets.DEPLOY_USER }}
-          key: ${{ secrets.DEPLOY_KEY }}
-          port: ${{ secrets.DEPLOY_PORT || 22 }}
-          script: |
-            # 登录到Docker Hub
-            echo ${{ secrets.DOCKERHUB_TOKEN }} | docker login -u ${{ vars.DOCKERHUB_USERNAME }} --password-stdin
-
-            # 停止并删除旧容器
-            docker stop resumaker-app || true
-            docker rm resumaker-app || true
-
-            # 清理未使用的镜像（保留最新的3个版本）
-            docker image prune -f
-            docker images ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }} --format "table {{.Repository}}\t{{.Tag}}\t{{.ID}}" | tail -n +4 | awk '{print $3}' | xargs -r docker rmi || true
-
-            # 拉取最新镜像
-            docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
-
-            # 启动新容器
-            docker run -d \
-              --name resumaker-app \
-              --restart unless-stopped \
-              --network my-nginx \
-              -p 9000:80 \
-              ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
-
-            # 验证部署状态
-            sleep 5
-            if docker ps | grep -q resumaker-app; then
-              echo "🎉 部署成功！"
-            else
-              echo "❌ 部署失败！"
-              exit 1
-            fi

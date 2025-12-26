@@ -13,7 +13,7 @@ function App() {
   return (
     <Provider>
       <GlobalErrorProvider>
-        <Router>
+        <Router basename="/resume">
           <Routes>
             <Route path="/" element={<MainPage />} />
             <Route

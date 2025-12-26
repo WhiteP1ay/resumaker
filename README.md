@@ -7,7 +7,7 @@
 [说明文档](https://whitemeta.cn/blog/%E6%88%91%E5%86%99%E4%BA%86%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8E%86%E5%88%B6%E4%BD%9C%E5%B7%A5%E5%85%B7)
 
 
-[在线使用](https://resume.whitemeta.cn/)
+[在线使用](https://whitemeta.cn/resume/)
 
 
 ## 为什么手写一个工具而不是xxx？
