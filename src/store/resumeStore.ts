@@ -73,7 +73,7 @@ const initialResume: Resume = {
       order: 2,
       data: {
         content:
-          '1. 熟练使用 html5 + css3 技术\n2. 熟练掌握 javascript (es6+) 和 Vue  技术栈,并深入了解其原理。\n3. 丰富的大型网站开发经验，对前端工程化，性能优化有丰富的实战经验。\n4. 熟练掌握 Typescript，SCSS 。\n5. 擅长 webpack  配置与前端架构设计。\n6. 熟悉 node.js ，包括 express/koa  等服务端框架',
+          '<ul><li>熟练使用 <strong>HTML5 + CSS3</strong> 技术，具备扎实的前端基础</li><li>熟练掌握 <strong>JavaScript (ES6+)</strong> 和 <strong>Vue</strong> 技术栈，并深入了解其原理</li><li>丰富的大型网站开发经验，对<span style="color: #3b82f6;">前端工程化</span>、<span style="color: #3b82f6;">性能优化</span>有丰富的实战经验</li><li>熟练掌握 <strong>TypeScript</strong>、<strong>SCSS</strong></li><li>擅长 <strong>Webpack</strong> 配置与前端架构设计</li><li>熟悉 <strong>Node.js</strong>，包括 Express/Koa 等服务端框架</li></ul>',
       },
     },
     {
@@ -87,7 +87,7 @@ const initialResume: Resume = {
       data: [
         {
           description:
-            '一个基于 React 19 构建的现代化在线简历编辑器，提供所见即所得的编辑体验。\n- 为了更轻量、更容易定制，组件库选择了Shadcn/UI \n- 构建工具选择了 Vite 并优化了首屏加载性能，总资源小于1MB\n- 基于 Docker + GithubAction 实现全自动 CI/CD\n- 这份项目是开源的，地址 https://github.com/WhiteP1ay/resumaker\n- 这份简历就是通过这个编辑工具制作出来的',
+            '<p>一个基于 <strong>React 19</strong> 构建的现代化在线简历编辑器，提供<span style="color: #3b82f6;">所见即所得</span>的编辑体验</p><ul><li>为了更轻量、更容易定制，组件库选择了 <strong>Shadcn/UI</strong></li><li>构建工具选择了 <strong>Vite</strong> 并优化了首屏加载性能，总资源小于 1MB</li><li>基于 <strong>Docker + GithubAction</strong> 实现全自动 CI/CD</li><li>这份项目是开源的，地址 <a href="https://github.com/WhiteP1ay/resumaker" target="_blank">https://github.com/WhiteP1ay/resumaker</a></li><li><em>这份简历就是通过这个编辑工具制作出来的</em></li></ul>',
           endDate: '',
           id: '1756977218779',
           secondarySubtitle: 'resume.whitemeta.cn',
@@ -103,7 +103,7 @@ const initialResume: Resume = {
           startDate: '',
           endDate: '',
           description:
-            '一个基于 Next 15 构建的博客网站\n- 良好的SEO，Google搜索"whitemeta"，本站排名第一\n- 基于TailwindCSS 实现 PC & H5 双端适配\n- 基于Google Analytics 实现全站流量统计\n- 当然博客网站最重要的还是内容，希望您能通过博文来更全面了解我',
+            '<p>一个基于 <strong>Next 15</strong> 构建的博客网站</p><ul><li>良好的 SEO，Google 搜索 <span style="color: #ef4444;">"whitemeta"</span>，本站排名第一</li><li>基于 <strong>TailwindCSS</strong> 实现 PC &amp; H5 双端适配</li><li>基于 <strong>Google Analytics</strong> 实现全站流量统计</li><li>当然博客网站最重要的还是内容，希望您能通过博文来更全面了解我 😊</li></ul>',
         },
       ],
     },
@@ -153,7 +153,7 @@ const initialResume: Resume = {
           startDate: '2021.03',
           endDate: '2024.06',
           description:
-            '负责淘宝商家平台前端开发与架构设计工作\n\n【主要职责】\n• 负责商家后台核心业务模块的前端开发，包括商品管理、订单处理、数据分析等\n• 参与前端架构设计，建立组件库和开发规范，提升团队开发效率\n• 优化页面性能，首屏加载时间从3.2s优化至1.1s，用户体验显著提升\n• 负责移动端H5页面开发，实现PC端和移动端的响应式适配\n\n【核心业绩】\n• 主导开发的商品管理系统日均处理订单量超过50万单\n• 建立的前端组件库被团队10+项目复用，开发效率提升40%\n• 优化的数据可视化方案，页面渲染性能提升60%\n• 获得年度优秀员工奖，技术创新奖等荣誉',
+            '<p>负责<strong>淘宝商家平台</strong>前端开发与架构设计工作</p><p><strong style="color: #3b82f6;">【主要职责】</strong></p><ul><li>负责商家后台核心业务模块的前端开发，包括<strong>商品管理</strong>、<strong>订单处理</strong>、<strong>数据分析</strong>等</li><li>参与前端架构设计，建立组件库和开发规范，提升团队开发效率</li><li>优化页面性能，首屏加载时间从 <span style="color: #ef4444;">3.2s</span> 优化至 <span style="color: #10b981;">1.1s</span>，用户体验显著提升</li><li>负责移动端 H5 页面开发，实现 PC 端和移动端的响应式适配</li></ul><p><strong style="color: #3b82f6;">【核心业绩】</strong></p><ul><li>主导开发的商品管理系统日均处理订单量超过 <strong>50 万单</strong></li><li>建立的前端组件库被团队 10+ 项目复用，开发效率提升 <span style="color: #10b981;">40%</span></li><li>优化的数据可视化方案，页面渲染性能提升 <span style="color: #10b981;">60%</span></li><li>获得<span style="color: #f59e0b;">年度优秀员工奖</span>、<span style="color: #f59e0b;">技术创新奖</span>等荣誉</li></ul>',
         },
         {
           id: '2',
@@ -163,7 +163,7 @@ const initialResume: Resume = {
           startDate: '2019.07',
           endDate: '2021.02',
           description:
-            '参与抖音创作者平台和企业服务相关产品的前端开发\n\n【主要职责】\n• 负责抖音创作者中心数据看板的前端开发和维护\n• 参与企业级SaaS产品的前端架构设计和开发\n• 配合产品和设计团队，实现高质量的用户界面和交互体验\n• 参与前端工程化建设，搭建自动化测试和部署流程\n\n【核心业绩】\n• 开发的创作者数据大屏支持千万级DAU的实时数据展示\n• 参与的企业服务平台服务客户数超过10万家\n• 建立的前端监控体系，线上bug数量减少70%\n• 主导的代码重构项目，代码质量和可维护性显著提升',
+            '<p>参与<strong>抖音创作者平台</strong>和<strong>企业服务</strong>相关产品的前端开发</p><p><strong style="color: #3b82f6;">【主要职责】</strong></p><ul><li>负责抖音创作者中心数据看板的前端开发和维护</li><li>参与企业级 <strong>SaaS</strong> 产品的前端架构设计和开发</li><li>配合产品和设计团队，实现高质量的用户界面和交互体验</li><li>参与前端工程化建设，搭建自动化测试和部署流程</li></ul><p><strong style="color: #3b82f6;">【核心业绩】</strong></p><ul><li>开发的创作者数据大屏支持<strong>千万级 DAU</strong> 的实时数据展示</li><li>参与的企业服务平台服务客户数超过 <strong>10 万家</strong></li><li>建立的前端监控体系，线上 bug 数量减少 <span style="color: #10b981;">70%</span></li><li>主导的代码重构项目，代码质量和可维护性显著提升</li></ul>',
         },
       ],
       pageNumber: 2,
