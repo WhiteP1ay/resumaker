@@ -19,8 +19,8 @@ RUN npm run build
 # 生产阶段：使用nginx提供静态文件服务
 FROM nginx:alpine AS production
 
-# 复制构建产物到nginx静态文件目录
-COPY --from=builder /app/dist /usr/share/nginx/html
+# 复制构建产物到nginx静态文件目录（考虑到base路径为/resume/）
+COPY --from=builder /app/dist /usr/share/nginx/html/resume
 
 # 复制nginx配置文件
 COPY nginx.conf /etc/nginx/nginx.conf
