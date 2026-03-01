@@ -23,7 +23,8 @@ interface TimelineEditorProps {
   initialData: TimelineItemType[];
   onSave: (data: TimelineItemType[], iconName?: string) => void;
   title: string;
-  currentIcon?: string;
+  selectedIcon: string;
+  iconEnabled: boolean;
 }
 
 export const TimelineEditor = ({
@@ -32,19 +33,21 @@ export const TimelineEditor = ({
   initialData,
   onSave,
   title,
-  currentIcon = 'briefcase',
+  selectedIcon: initialIcon,
 }: TimelineEditorProps) => {
   const {
     items,
     selectedIcon,
+    iconEnabled,
     saveStatusText,
     dragConfig,
     addItem,
     removeItem,
     updateItem,
     setSelectedIcon,
+    setIconEnabled,
     handleClose,
-  } = useTimelineEditor(isOpen, initialData, currentIcon, onSave, onClose);
+  } = useTimelineEditor(isOpen, initialData, initialIcon, onSave, onClose);
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
@@ -59,7 +62,29 @@ export const TimelineEditor = ({
 
         <div className="space-y-6">
           {/* 图标选择区域 */}
-          <IconPicker value={selectedIcon} onChange={setSelectedIcon} label="图标" />
+          <div className="space-y-3">
+            <div className="flex items-center space-x-2">
+              <input
+                type="checkbox"
+                id="icon-toggle"
+                checked={iconEnabled}
+                onChange={(e) => setIconEnabled(e.target.checked)}
+                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
+              />
+              <label
+                htmlFor="icon-toggle"
+                className="text-sm font-medium text-gray-700 cursor-pointer"
+              >
+                显示模块图标
+              </label>
+            </div>
+
+            {iconEnabled && (
+              <div className="pl-6 border-l-2 border-blue-100">
+                <IconPicker value={selectedIcon} onChange={setSelectedIcon} label="图标" />
+              </div>
+            )}
+          </div>
 
           {/* 时间线项目列表 */}
           {items.length > 0 && (

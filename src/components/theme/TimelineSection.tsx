@@ -59,6 +59,8 @@ export const TimelineSection: React.FC<TimelineSectionProps> = ({ section, isEdi
           <TimelineEditor
             {...editorProps}
             initialData={editorProps.initialData as TimelineItem[]}
+            selectedIcon={section.iconName || 'briefcase'}
+            iconEnabled={true}
           />
         );
     }
