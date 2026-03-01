@@ -47,8 +47,8 @@ export const TimelineSection: React.FC<TimelineSectionProps> = ({ section, isEdi
           <TextEditor
             {...editorProps}
             initialData={editorProps.initialData as TextContent}
-            selectedIcon={section.iconName || 'briefcase'}
-            iconEnabled={true}
+            selectedIcon={section.iconName}
+            iconEnabled={true} // 这个属性当前不生效
           />
         );
       case 'list':
@@ -59,8 +59,8 @@ export const TimelineSection: React.FC<TimelineSectionProps> = ({ section, isEdi
           <TimelineEditor
             {...editorProps}
             initialData={editorProps.initialData as TimelineItem[]}
-            selectedIcon={section.iconName || 'briefcase'}
-            iconEnabled={true}
+            selectedIcon={section.iconName}
+            iconEnabled={true} // 这个属性当前不生效
           />
         );
     }
