@@ -13,7 +13,7 @@ export const BasicInfoSectionItem = ({
 }: BasicInfoSectionItemProps) => {
   return (
     <div className={`flex items-center space-x-1 ${className}`}>
-      <Icon className="h-4 w-4 print:h-3 print:w-3" />
+      <Icon className="h-4 w-4" />
       <span>{children}</span>
     </div>
   );

@@ -107,7 +107,7 @@ export const MinimalTimelineSection = ({
   return (
     <>
       <div className={`relative ${className || ''}`}>
-        <div className="mb-6 print:mb-5">
+        <div className="mb-6">
           {renderTitle()}
           <div className="mt-3">
             <TimelineContent

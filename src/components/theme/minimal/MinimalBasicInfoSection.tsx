@@ -24,7 +24,7 @@ export const MinimalBasicInfoSection = ({
   return (
     <>
       <div
-        className={`relative group px-8 pt-8 pb-6 print:px-6 print:pt-6 print:pb-4 border-b ${className || ''}`}
+        className={`relative group px-8 pt-8 pb-6 border-b ${className || ''}`}
         style={{ borderColor: 'var(--minimal-timeline-title-border)' }}
       >
         {isEditable && (
@@ -77,7 +77,7 @@ export const MinimalBasicInfoSection = ({
             )}
           </div>
 
-          <div className="avatar shrink-0 hidden md:block print:block">
+          <div className="avatar shrink-0 hidden md:block">
             <AvatarDisplay src={data.avatar} alt={data.name || '头像'} size="md" />
           </div>
         </div>

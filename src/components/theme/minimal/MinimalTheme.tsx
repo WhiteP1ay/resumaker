@@ -22,7 +22,7 @@ const MinimalSinglePage = ({
 
   return (
     <div
-      className="minimal-theme-root max-w-4xl mx-auto bg-white shadow-lg print:shadow-none print:max-w-none"
+      className="minimal-theme-root max-w-4xl mx-auto bg-white shadow-lg print:shadow-none"
       style={{
         backgroundColor: 'var(--minimal-paper-bg)',
       }}
@@ -43,8 +43,8 @@ const MinimalSinglePage = ({
         </div>
       )}
       {timelineSections.length > 0 && (
-        <div className={`px-8 pb-8 print:px-6 print:pb-6 ${pageNumber !== 1 ? 'pt-8' : ''}`}>
-          <div className="space-y-6 print:space-y-4">
+        <div className={`px-8 pb-8 ${pageNumber !== 1 ? 'pt-8' : ''}`}>
+          <div className="space-y-6">
             {timelineSections.map((section, index) => (
               <MinimalTimelineSection
                 key={section.id}
@@ -81,21 +81,24 @@ export const MinimalTheme = ({
 
   return (
     <div className={`print-container ${className}`} style={themeStyle}>
-      <div className="space-y-8 print:space-y-0">
+      <div className="space-y-8">
         {Array.from({ length: resume.pageSettings.totalPages }, (_, index) => index + 1).map(
-          (pageNumber) => (
-            <div
-              key={`page-${pageNumber}`}
-              className="print:page-break-after-always print:page-break-inside-avoid"
-            >
-              <MinimalSinglePage
-                resume={resume}
-                isEditable={isEditable}
-                pageNumber={pageNumber}
-                getSectionClassName={getSectionClassName}
-              />
-            </div>
-          ),
+          (pageNumber) => {
+            const isLastPage = pageNumber === resume.pageSettings?.totalPages;
+            return (
+              <div
+                key={`page-${pageNumber}`}
+                className={`print:page-break-inside-avoid ${isLastPage ? '' : 'print:page-break-after-always'}`}
+              >
+                <MinimalSinglePage
+                  resume={resume}
+                  isEditable={isEditable}
+                  pageNumber={pageNumber}
+                  getSectionClassName={getSectionClassName}
+                />
+              </div>
+            );
+          },
         )}
       </div>
     </div>

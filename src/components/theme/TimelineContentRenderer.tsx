@@ -14,7 +14,7 @@ export const TimelineContent = ({ data, isEditable, onUpdateItem }: TimelineCont
   const [editingId, setEditingId] = useState<string | null>(null);
 
   return (
-    <div className="space-y-4 print:space-y-3">
+    <div className="space-y-4">
       {data.map((item) => (
         <div key={item.id} className="relative group/item">
           {isEditable && (
@@ -28,11 +28,11 @@ export const TimelineContent = ({ data, isEditable, onUpdateItem }: TimelineCont
             </Button>
           )}
 
-          <div className="flex justify-between items-start mb-2 print:mb-1">
+          <div className="flex justify-between items-start mb-2">
             <div className="flex-1">
               {item.title && (
-                <div className="flex items-center space-x-3 mb-1 print:mb-0.5">
-                  <h3 className="title text-xl font-semibold text-gray-900 print:text-sm whitespace-pre">
+                <div className="flex items-center space-x-3 mb-1">
+                  <h3 className="title text-xl font-semibold text-gray-900 whitespace-pre">
                     {item.title}
                   </h3>
                   <span className="subtitle text-sm text-gray-600 whitespace-pre">
@@ -55,7 +55,7 @@ export const TimelineContent = ({ data, isEditable, onUpdateItem }: TimelineCont
 
           {item.description && (
             <div
-              className="description text-sm text-gray-700 leading-relaxed mt-2 print:mt-1 rich-text-display"
+              className="description text-sm text-gray-700 leading-relaxed mt-2 rich-text-display"
               // biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation>
               dangerouslySetInnerHTML={{ __html: item.description }}
             />

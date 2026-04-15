@@ -20,7 +20,7 @@ export const PreviewPage = () => {
       <ResumeDisplay
         resume={resume}
         isEditable={false}
-        className="max-w-4xl mx-auto p-4 bg-white min-h-screen print:p-2 print:max-w-none"
+        className="max-w-4xl mx-auto p-4 bg-white min-h-screen print:mx-0 print:p-0 print:max-w-full print:min-h-0"
       />
 
       <PreviewPageFooter />

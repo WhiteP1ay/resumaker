@@ -37,7 +37,11 @@ export const MainPage = () => {
         <div className="flex items-start gap-4">
           <ResumeSettingsSidebar onClearResume={() => setShowClearDialog(true)} />
           <div className="flex-1 min-w-0">
-            <ResumeDisplay resume={resume} isEditable={true} className="min-h-screen" />
+            <ResumeDisplay
+              resume={resume}
+              isEditable={true}
+              className="max-w-4xl mx-auto p-4 bg-white min-h-screen"
+            />
           </div>
         </div>
       </main>
