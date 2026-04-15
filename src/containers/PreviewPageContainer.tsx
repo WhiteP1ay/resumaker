@@ -2,13 +2,11 @@ import { ResumeDisplay } from '@/components/ResumeDisplay';
 import { PreviewPageFooter } from '@/components/layout/PreviewPageFooter';
 import { PrintTipBar } from '@/components/layout/PrintTipBar';
 import { CustomCssStyleTag } from '@/components/style/CustomCssStyleTag';
-import { useJson } from '@/hooks/useJson';
 import { resumeAtom } from '@/store/resumeStore';
 import { useAtomValue } from 'jotai';
 
 export const PreviewPageContainer = () => {
   const resume = useAtomValue(resumeAtom);
-  const { handleExportJson } = useJson();
 
   const handlePrint = () => {
     window.print();
@@ -16,7 +14,7 @@ export const PreviewPageContainer = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 print:bg-white">
-      <PrintTipBar onPrint={handlePrint} onExportPdf={handleExportJson} />
+      <PrintTipBar onPrint={handlePrint} />
 
       {/* 简历内容 */}
       <ResumeDisplay

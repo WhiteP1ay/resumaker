@@ -37,6 +37,11 @@ export const ThemeSelectPanel = () => {
     minimal: false,
     split: false,
   });
+  const [expandedMinimalGroups, setExpandedMinimalGroups] = useState({
+    paper: false,
+    basicInfo: true,
+    timeline: false,
+  });
 
   const themeTokensByTheme = useMemo(
     () => ({
@@ -50,6 +55,69 @@ export const ThemeSelectPanel = () => {
     setExpandedThemes((prev) => ({ ...prev, [theme]: !prev[theme] }));
   };
 
+  const toggleMinimalGroup = (group: 'paper' | 'basicInfo' | 'timeline') => {
+    setExpandedMinimalGroups((prev) => ({ ...prev, [group]: !prev[group] }));
+  };
+
+  const renderTokenInput = (
+    optionId: ResumeTheme,
+    tokenDefinition: (typeof THEME_TOKEN_DEFINITIONS)[ResumeTheme][number],
+    currentTokens: Record<string, string>,
+  ) => (
+    <div key={tokenDefinition.key} className="rounded-md border border-gray-200 bg-white p-2.5">
+      <div className="flex items-center justify-between gap-2">
+        <div className="min-w-0">
+          <p className="text-xs font-medium text-gray-900">{tokenDefinition.label}</p>
+          <p className="text-[11px] text-gray-500">{tokenDefinition.description}</p>
+        </div>
+        <div className="flex items-center gap-2">
+          {(tokenDefinition.editor ?? 'color') === 'color' ? (
+            <>
+              <input
+                type="color"
+                value={currentTokens[tokenDefinition.key] ?? tokenDefinition.defaultValue}
+                onChange={(e) =>
+                  updateThemeTokens(optionId, {
+                    ...currentTokens,
+                    [tokenDefinition.key]: e.target.value,
+                  })
+                }
+                className="h-7 w-9 rounded border border-gray-200 bg-transparent p-0.5 cursor-pointer"
+                aria-label={`${optionId}-${tokenDefinition.label}`}
+              />
+              <input
+                type="text"
+                value={currentTokens[tokenDefinition.key] ?? tokenDefinition.defaultValue}
+                onChange={(e) =>
+                  updateThemeTokens(optionId, {
+                    ...currentTokens,
+                    [tokenDefinition.key]: e.target.value,
+                  })
+                }
+                className="h-7 w-24 rounded border border-gray-200 px-2 text-xs font-mono"
+                aria-label={`${optionId}-${tokenDefinition.label}-hex`}
+              />
+            </>
+          ) : (
+            <input
+              type="text"
+              value={currentTokens[tokenDefinition.key] ?? tokenDefinition.defaultValue}
+              onChange={(e) =>
+                updateThemeTokens(optionId, {
+                  ...currentTokens,
+                  [tokenDefinition.key]: e.target.value,
+                })
+              }
+              placeholder={tokenDefinition.defaultValue}
+              className="h-7 w-32 rounded border border-gray-200 px-2 text-xs font-mono"
+              aria-label={`${optionId}-${tokenDefinition.label}`}
+            />
+          )}
+        </div>
+      </div>
+    </div>
+  );
+
   return (
     <div className="space-y-3">
       {themeOptions.map((option) => {
@@ -58,6 +126,14 @@ export const ThemeSelectPanel = () => {
         const isExpanded = expandedThemes[option.id];
         const tokenDefinitions = THEME_TOKEN_DEFINITIONS[option.id];
         const currentTokens = themeTokensByTheme[option.id];
+        const minimalGroupedDefinitions =
+          option.id === 'minimal'
+            ? {
+                paper: tokenDefinitions.filter((item) => item.group === 'paper'),
+                basicInfo: tokenDefinitions.filter((item) => item.group === 'basicInfo'),
+                timeline: tokenDefinitions.filter((item) => item.group === 'timeline'),
+              }
+            : null;
 
         return (
           <div
@@ -106,69 +182,39 @@ export const ThemeSelectPanel = () => {
                     还原
                   </button>
                 </div>
-                {tokenDefinitions.map((tokenDefinition) => (
-                  <div
-                    key={tokenDefinition.key}
-                    className="rounded-md border border-gray-200 bg-white p-2.5"
-                  >
-                    <div className="flex items-center justify-between gap-2">
-                      <div className="min-w-0">
-                        <p className="text-xs font-medium text-gray-900">{tokenDefinition.label}</p>
-                        <p className="text-[11px] text-gray-500">{tokenDefinition.description}</p>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        {(tokenDefinition.editor ?? 'color') === 'color' ? (
-                          <>
-                            <input
-                              type="color"
-                              value={
-                                currentTokens[tokenDefinition.key] ?? tokenDefinition.defaultValue
-                              }
-                              onChange={(e) =>
-                                updateThemeTokens(option.id, {
-                                  ...currentTokens,
-                                  [tokenDefinition.key]: e.target.value,
-                                })
-                              }
-                              className="h-7 w-9 rounded border border-gray-200 bg-transparent p-0.5 cursor-pointer"
-                              aria-label={`${option.title}-${tokenDefinition.label}`}
-                            />
-                            <input
-                              type="text"
-                              value={
-                                currentTokens[tokenDefinition.key] ?? tokenDefinition.defaultValue
-                              }
-                              onChange={(e) =>
-                                updateThemeTokens(option.id, {
-                                  ...currentTokens,
-                                  [tokenDefinition.key]: e.target.value,
-                                })
-                              }
-                              className="h-7 w-24 rounded border border-gray-200 px-2 text-xs font-mono"
-                              aria-label={`${option.title}-${tokenDefinition.label}-hex`}
-                            />
-                          </>
-                        ) : (
-                          <input
-                            type="text"
-                            value={
-                              currentTokens[tokenDefinition.key] ?? tokenDefinition.defaultValue
-                            }
-                            onChange={(e) =>
-                              updateThemeTokens(option.id, {
-                                ...currentTokens,
-                                [tokenDefinition.key]: e.target.value,
-                              })
-                            }
-                            placeholder={tokenDefinition.defaultValue}
-                            className="h-7 w-32 rounded border border-gray-200 px-2 text-xs font-mono"
-                            aria-label={`${option.title}-${tokenDefinition.label}`}
-                          />
+                {option.id === 'minimal' && minimalGroupedDefinitions ? (
+                  <>
+                    {[
+                      { key: 'paper' as const, label: '纸张颜色' },
+                      { key: 'basicInfo' as const, label: '基础信息' },
+                      { key: 'timeline' as const, label: '时间线' },
+                    ].map((group) => (
+                      <div key={group.key} className="rounded-md border border-gray-200 bg-gray-50">
+                        <button
+                          type="button"
+                          className="w-full px-3 py-2 text-sm font-medium text-gray-800 flex items-center justify-between"
+                          onClick={() => toggleMinimalGroup(group.key)}
+                        >
+                          <span>{group.label}</span>
+                          {expandedMinimalGroups[group.key] ? (
+                            <ChevronUp className="h-4 w-4" />
+                          ) : (
+                            <ChevronDown className="h-4 w-4" />
+                          )}
+                        </button>
+                        {expandedMinimalGroups[group.key] && (
+                          <div className="px-2 pb-2 space-y-2">
+                            {minimalGroupedDefinitions[group.key].map((tokenDefinition) =>
+                              renderTokenInput(option.id, tokenDefinition, currentTokens),
+                            )}
+                          </div>
                         )}
                       </div>
-                    </div>
-                  </div>
-                ))}
+                    ))}
+                  </>
+                ) : (
+                  <>{tokenDefinitions.map((tokenDefinition) => renderTokenInput(option.id, tokenDefinition, currentTokens))}</>
+                )}
               </div>
             )}
           </div>

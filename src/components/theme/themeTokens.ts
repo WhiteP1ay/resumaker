@@ -1,6 +1,7 @@
 import type { ResumeTheme, ThemeColorTokenMap, ThemeColorTokens } from '@/types/resume';
 
 export type ThemeTokenEditor = 'color' | 'length';
+export type ThemeTokenGroup = 'paper' | 'basicInfo' | 'timeline';
 
 export interface ThemeTokenDefinition {
   key: string;
@@ -10,6 +11,8 @@ export interface ThemeTokenDefinition {
   defaultValue: string;
   /** 默认 color：取色器 + 文本；length：仅文本（如 rem/px） */
   editor?: ThemeTokenEditor;
+  /** token 所属分组，用于主题设置分区渲染 */
+  group?: ThemeTokenGroup;
 }
 
 export const THEME_TOKEN_DEFINITIONS: Record<ResumeTheme, ThemeTokenDefinition[]> = {
@@ -20,6 +23,7 @@ export const THEME_TOKEN_DEFINITIONS: Record<ResumeTheme, ThemeTokenDefinition[]
       description: '整页纸张背景色',
       cssVar: '--minimal-paper-bg',
       defaultValue: '#ffffff',
+      group: 'paper',
     },
     {
       key: 'basicInfoBackground',
@@ -27,6 +31,7 @@ export const THEME_TOKEN_DEFINITIONS: Record<ResumeTheme, ThemeTokenDefinition[]
       description: '仅基础信息区域背景色',
       cssVar: '--minimal-basic-info-bg',
       defaultValue: '#ffffff',
+      group: 'basicInfo',
     },
     {
       key: 'textPrimary',
@@ -34,6 +39,7 @@ export const THEME_TOKEN_DEFINITIONS: Record<ResumeTheme, ThemeTokenDefinition[]
       description: '仅基础信息区域标题文字颜色',
       cssVar: '--minimal-text-primary',
       defaultValue: '#111827',
+      group: 'basicInfo',
     },
     {
       key: 'basicInfoText',
@@ -41,35 +47,66 @@ export const THEME_TOKEN_DEFINITIONS: Record<ResumeTheme, ThemeTokenDefinition[]
       description: '仅基础信息区域字段字体颜色',
       cssVar: '--minimal-basic-info-text',
       defaultValue: '#4b5563',
+      group: 'basicInfo',
     },
     {
       key: 'basicInfoBottomSpacing',
       label: '基本信息下间距',
       description: '基础信息区域底部外侧间距（如 1.5rem、24px）',
       cssVar: '--minimal-basic-info-bottom-spacing',
-      defaultValue: '1.5rem',
+      defaultValue: '0rem',
       editor: 'length',
+      group: 'basicInfo',
     },
     {
       key: 'timelineTitleBackground',
       label: '标题背景色',
-      description: '时间线大标题背景色（可设为 transparent）',
+      description: '时间线大标题背景色',
       cssVar: '--minimal-timeline-title-bg',
-      defaultValue: 'transparent',
+      defaultValue: '#ffffff',
+      group: 'timeline',
     },
     {
       key: 'timelineTitleBorder',
       label: '标题边框色',
       description: '时间线大标题边框色',
       cssVar: '--minimal-timeline-title-border',
-      defaultValue: '#d1fae5',
+      defaultValue: '#ffffff',
+      group: 'timeline',
     },
     {
       key: 'timelineTitleAccent',
       label: '标题强调色',
       description: '时间线大标题文字/图标强调色',
       cssVar: '--minimal-timeline-title-accent',
-      defaultValue: '#065f46',
+      defaultValue: '#000000',
+      group: 'timeline',
+    },
+    {
+      key: 'timelineTitleMarginLeft',
+      label: '标题左外边距',
+      description: '时间线标题整体左外边距（如 0px、12px、1rem）',
+      cssVar: '--minimal-timeline-title-margin-left',
+      defaultValue: '-1rem',
+      editor: 'length',
+      group: 'timeline',
+    },
+    {
+      key: 'timelineTitleFontSize',
+      label: '标题字体大小',
+      description: '时间线标题字号（如 2rem、32px）',
+      cssVar: '--minimal-timeline-title-font-size',
+      defaultValue: '2rem',
+      editor: 'length',
+      group: 'timeline',
+    },
+    {
+      key: 'timelineTitlePrefixColor',
+      label: '标题前方块颜色',
+      description: '时间线标题前的小方块颜色',
+      cssVar: '--minimal-timeline-title-prefix-color',
+      defaultValue: '#000000',
+      group: 'timeline',
     },
   ],
   split: [
@@ -113,10 +150,10 @@ export const THEME_TOKEN_DEFINITIONS: Record<ResumeTheme, ThemeTokenDefinition[]
 
 export const DEFAULT_THEME_COLOR_TOKENS: Required<ThemeColorTokenMap> = {
   minimal: Object.fromEntries(
-    THEME_TOKEN_DEFINITIONS.minimal.map((definition) => [definition.key, definition.defaultValue])
+    THEME_TOKEN_DEFINITIONS.minimal.map((definition) => [definition.key, definition.defaultValue]),
   ),
   split: Object.fromEntries(
-    THEME_TOKEN_DEFINITIONS.split.map((definition) => [definition.key, definition.defaultValue])
+    THEME_TOKEN_DEFINITIONS.split.map((definition) => [definition.key, definition.defaultValue]),
   ),
 };
 
@@ -136,7 +173,7 @@ export const LEGACY_WATERMELON_TOKEN_KEYS = {
 
 export const getThemeTokens = (
   theme: ResumeTheme | string,
-  tokenMap?: ThemeColorTokenMap
+  tokenMap?: ThemeColorTokenMap,
 ): ThemeColorTokens => ({
   ...DEFAULT_THEME_COLOR_TOKENS[normalizeTheme(theme)],
   ...(tokenMap?.[normalizeTheme(theme)] ?? {}),
@@ -144,7 +181,7 @@ export const getThemeTokens = (
 
 export const getThemeCssVariables = (
   theme: ResumeTheme | string,
-  tokenMap?: ThemeColorTokenMap
+  tokenMap?: ThemeColorTokenMap,
 ): Record<string, string> => {
   const safeTheme = normalizeTheme(theme);
   const tokens = getThemeTokens(safeTheme, tokenMap);
