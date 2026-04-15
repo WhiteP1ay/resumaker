@@ -1,6 +1,28 @@
-import type { BasicInfo, Resume, ResumeSection, TimelineItem } from '@/types/resume';
+import { DEFAULT_THEME_COLOR_TOKENS } from '@/components/theme/themeTokens';
+import type { BasicInfo, Resume, ResumeSection, ResumeStyle, TimelineItem } from '@/types/resume';
 import { atom } from 'jotai';
 import { atomWithStorage } from 'jotai/utils';
+
+const migrateLegacyWatermelonToMinimal = (themeColorTokens: unknown) => {
+  const tokenMap = (themeColorTokens ?? {}) as Record<string, Record<string, string> | undefined>;
+  const legacyWatermelon = tokenMap.watermelon ?? {};
+  const minimalFromLegacy = {
+    timelineTitleBackground: legacyWatermelon.titleBackground,
+    timelineTitleBorder: legacyWatermelon.titleBorder,
+    timelineTitleAccent: legacyWatermelon.titleAccent,
+  };
+  return {
+    ...DEFAULT_THEME_COLOR_TOKENS,
+    ...tokenMap,
+    minimal: {
+      ...DEFAULT_THEME_COLOR_TOKENS.minimal,
+      ...(tokenMap.minimal ?? {}),
+      ...Object.fromEntries(
+        Object.entries(minimalFromLegacy).filter(([, value]) => typeof value === 'string')
+      ),
+    },
+  };
+};
 
 const initialResume: Resume = {
   id: '1',
@@ -147,6 +169,12 @@ const initialResume: Resume = {
       ],
     },
   ],
+  style: {
+    sections: [],
+    customCSS: '',
+    theme: 'minimal',
+    themeColorTokens: DEFAULT_THEME_COLOR_TOKENS,
+  },
 };
 
 export const resumeAtom = atomWithStorage<Resume>('resume-data', initialResume);
@@ -240,6 +268,22 @@ export const updateMultipleSectionsPageAtom = atom(
       return update ? { ...section, pageNumber: update.pageNumber } : section;
     });
     set(resumeAtom, { ...resume, sections: updatedSections });
+  }
+);
+
+export const updateResumeStyleAtom = atom(
+  null,
+  (get, set, styleUpdate: Partial<ResumeStyle> | ((prev: ResumeStyle) => Partial<ResumeStyle>)) => {
+    const resume = get(resumeAtom);
+    const currentStyle: ResumeStyle = {
+      sections: resume.style?.sections ?? [],
+      customCSS: resume.style?.customCSS ?? '',
+      theme: resume.style?.theme === 'watermelon' ? 'minimal' : (resume.style?.theme ?? 'minimal'),
+      themeColorTokens: migrateLegacyWatermelonToMinimal(resume.style?.themeColorTokens),
+    };
+    const resolvedUpdate = typeof styleUpdate === 'function' ? styleUpdate(currentStyle) : styleUpdate;
+    const nextStyle: ResumeStyle = { ...currentStyle, ...resolvedUpdate };
+    set(resumeAtom, { ...resume, style: nextStyle });
   }
 );
 

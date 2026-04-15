@@ -42,12 +42,17 @@ export const usePageSettings = () => {
   }, [toggleMultiPageMode, sections, batchSetSectionsPage]);
 
   // 更新模块页面分配
-  const handleSectionPageChange = useCallback((sectionId: string, pageNumber: number) => {
-    setLocalPageAssignments((prev) => ({
-      ...prev,
-      [sectionId]: pageNumber,
-    }));
-  }, []);
+  const handleSectionPageChange = useCallback(
+    (sectionId: string, pageNumber: number) => {
+      setLocalPageAssignments((prev) => ({
+        ...prev,
+        [sectionId]: pageNumber,
+      }));
+      // 立即同步到全局状态，保证预览区域实时响应页码修改。
+      batchSetSectionsPage([{ sectionId, pageNumber }]);
+    },
+    [batchSetSectionsPage]
+  );
 
   // 应用页面分配更改
   const applyPageAssignments = useCallback(() => {
@@ -61,20 +66,27 @@ export const usePageSettings = () => {
   // 自动分配（奇数模块在第一页，偶数模块在第二页）
   const handleAutoAssign = useCallback(() => {
     const assignments: Record<string, number> = {};
+    const updates: Array<{ sectionId: string; pageNumber: number }> = [];
     sections.forEach((section, index) => {
-      assignments[section.id] = (index % 2) + 1;
+      const pageNumber = (index % 2) + 1;
+      assignments[section.id] = pageNumber;
+      updates.push({ sectionId: section.id, pageNumber });
     });
     setLocalPageAssignments(assignments);
-  }, [sections]);
+    batchSetSectionsPage(updates);
+  }, [sections, batchSetSectionsPage]);
 
   // 重置分配（所有模块到第一页）
   const handleResetAssignments = useCallback(() => {
     const assignments: Record<string, number> = {};
+    const updates: Array<{ sectionId: string; pageNumber: number }> = [];
     sections.forEach((section) => {
       assignments[section.id] = 1;
+      updates.push({ sectionId: section.id, pageNumber: 1 });
     });
     setLocalPageAssignments(assignments);
-  }, [sections]);
+    batchSetSectionsPage(updates);
+  }, [sections, batchSetSectionsPage]);
 
   // 获取每页的模块数量
   const getPageSectionCount = useCallback(

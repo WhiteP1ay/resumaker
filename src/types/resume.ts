@@ -46,9 +46,19 @@ export interface SectionStyle {
   className?: string;
 }
 
+export type ResumeTheme = 'minimal' | 'split';
+export type ThemeColorTokens = Record<string, string>;
+
+export interface ThemeColorTokenMap {
+  minimal?: ThemeColorTokens;
+  split?: ThemeColorTokens;
+}
+
 export interface ResumeStyle {
   sections: SectionStyle[];
   customCSS?: string;
+  theme?: ResumeTheme;
+  themeColorTokens?: ThemeColorTokenMap;
 }
 
 export interface Resume {

@@ -32,7 +32,7 @@ export const TimelineContent = ({ data, isEditable, onUpdateItem }: TimelineCont
             <div className="flex-1">
               {item.title && (
                 <div className="flex items-center space-x-3 mb-1 print:mb-0.5">
-                  <h3 className="title text-base font-semibold text-gray-900 print:text-sm whitespace-pre">
+                  <h3 className="title text-xl font-semibold text-gray-900 print:text-sm whitespace-pre">
                     {item.title}
                   </h3>
                   <span className="subtitle text-sm text-gray-600 whitespace-pre">
@@ -56,6 +56,7 @@ export const TimelineContent = ({ data, isEditable, onUpdateItem }: TimelineCont
           {item.description && (
             <div
               className="description text-sm text-gray-700 leading-relaxed mt-2 print:mt-1 rich-text-display"
+              // biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation>
               dangerouslySetInnerHTML={{ __html: item.description }}
             />
           )}

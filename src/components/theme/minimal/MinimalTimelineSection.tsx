@@ -1,23 +1,23 @@
-import { IconRenderer } from '@/components/IconPicker';
 import { TimelineSectionManager } from '@/components/editors/TimelineSectionManager';
+import { IconRenderer } from '@/components/IconPicker';
 import { TimelineContent } from '@/components/theme/TimelineContentRenderer';
 import { Button } from '@/components/ui/button';
 import { useResumeEditor } from '@/hooks/components/useResumeEditor';
 import type { ResumeSection, TimelineItem } from '@/types/resume';
 import { Settings2 } from 'lucide-react';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
-interface TimelineSectionProps {
+interface MinimalTimelineSectionProps {
   section: ResumeSection;
   isEditable?: boolean;
   className?: string;
 }
 
-export const TimelineSection: React.FC<TimelineSectionProps> = ({
+export const MinimalTimelineSection = ({
   section,
   isEditable,
   className,
-}) => {
+}: MinimalTimelineSectionProps) => {
   const { handleTimelineSave } = useResumeEditor(section.id);
   const [isManagerOpen, setIsManagerOpen] = useState(false);
 
@@ -25,20 +25,29 @@ export const TimelineSection: React.FC<TimelineSectionProps> = ({
     const items = section.data as TimelineItem[];
     handleTimelineSave(
       items.map((i) => (i.id === updatedItem.id ? updatedItem : i)),
-      section.iconName,
+      section.iconName
     );
   };
 
   return (
     <>
       <div className={`relative ${className || ''}`}>
-        <div className="mb-6 print:mb-6">
-          <div className="flex items-center pb-[.5rem] border-b-gray-400 border-b-[1px] group/header">
-            <h2 className="section-title text-2xl font-bold leading-tight text-gray-900">
+        <div className="mb-6 print:mb-5">
+          <div
+            className="flex items-center rounded-lg px-3 py-2 border group/header"
+            style={{
+              backgroundColor: 'var(--minimal-timeline-title-bg)',
+              borderColor: 'var(--minimal-timeline-title-border)',
+            }}
+          >
+            <h2
+              className="section-title text-[2rem] font-bold leading-tight"
+              style={{ color: 'var(--minimal-timeline-title-accent)' }}
+            >
               {section.title}
             </h2>
             {section.iconName && (
-              <div className="p-2">
+              <div className="ml-2" style={{ color: 'var(--minimal-timeline-title-accent)' }}>
                 <IconRenderer iconName={section.iconName} className="h-4 w-4" />
               </div>
             )}
@@ -46,16 +55,16 @@ export const TimelineSection: React.FC<TimelineSectionProps> = ({
               <Button
                 variant="ghost"
                 size="icon"
-                className="ml-auto opacity-0 group-hover/header:opacity-100 transition-opacity duration-200 hover:bg-gray-100 h-7 w-7 print:hidden"
+                className="ml-auto opacity-0 group-hover/header:opacity-100 transition-opacity duration-200 h-7 w-7 print:hidden"
+                style={{ color: 'var(--minimal-timeline-title-accent)' }}
                 onClick={() => setIsManagerOpen(true)}
                 title="管理条目"
               >
-                <Settings2 className="h-3.5 w-3.5 text-gray-500" />
+                <Settings2 className="h-3.5 w-3.5" />
               </Button>
             )}
           </div>
-
-          <div className="mt-[.5rem]">
+          <div className="mt-3">
             <TimelineContent
               data={section.data as TimelineItem[]}
               isEditable={isEditable}

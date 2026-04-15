@@ -1,6 +1,7 @@
 import { ResumeDisplay } from '@/components/ResumeDisplay';
 import { PreviewPageFooter } from '@/components/layout/PreviewPageFooter';
 import { PrintTipBar } from '@/components/layout/PrintTipBar';
+import { CustomCssStyleTag } from '@/components/style/CustomCssStyleTag';
 import { useJson } from '@/hooks/useJson';
 import { resumeAtom } from '@/store/resumeStore';
 import { useAtomValue } from 'jotai';
@@ -27,9 +28,7 @@ export const PreviewPageContainer = () => {
       <PreviewPageFooter />
 
       {/* 注入自定义CSS */}
-      {resume.style?.customCSS && (
-        <style id="resume-custom-css" dangerouslySetInnerHTML={{ __html: resume.style.customCSS }} />
-      )}
+      {resume.style?.customCSS && <CustomCssStyleTag cssText={resume.style.customCSS} />}
     </div>
   );
 };

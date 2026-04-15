@@ -7,11 +7,14 @@ import {
   updateMultipleSectionsPageAtom,
   updatePageSettingsAtom,
   updateSectionDataAtom,
+  updateResumeStyleAtom,
   updateSectionPropsAtom,
   updateSectionsOrderAtom,
 } from '@/store/resumeStore';
-import type { BasicInfo, TimelineItem } from '@/types/resume';
+import type { BasicInfo, ResumeTheme, SectionStyle, ThemeColorTokens, TimelineItem } from '@/types/resume';
 import { useAtomValue, useSetAtom } from 'jotai';
+import { useCallback } from 'react';
+import { DEFAULT_THEME_COLOR_TOKENS } from '@/components/theme/themeTokens';
 
 export const useResumeActions = () => {
   const updateSectionData = useSetAtom(updateSectionDataAtom);
@@ -21,6 +24,7 @@ export const useResumeActions = () => {
   const deleteSection = useSetAtom(deleteSectionAtom);
   const updatePageSettings = useSetAtom(updatePageSettingsAtom);
   const updateMultipleSectionsPage = useSetAtom(updateMultipleSectionsPageAtom);
+  const updateResumeStyle = useSetAtom(updateResumeStyleAtom);
   const resetResume = useSetAtom(resetResumeAtom);
 
   const getSection = useAtomValue(getSectionAtom);
@@ -57,6 +61,45 @@ export const useResumeActions = () => {
     updateMultipleSectionsPage(updates);
   };
 
+  const updateTheme = (theme: ResumeTheme) => {
+    updateResumeStyle({ theme });
+  };
+
+  const updateCustomStyle = (customCSS: string, sections: SectionStyle[]) => {
+    updateResumeStyle({ customCSS, sections });
+  };
+
+  const updateThemeTokens = useCallback(
+    (theme: ResumeTheme, tokens: ThemeColorTokens) => {
+      updateResumeStyle((prevStyle) => ({
+        ...prevStyle,
+        themeColorTokens: {
+          ...DEFAULT_THEME_COLOR_TOKENS,
+          ...(prevStyle?.themeColorTokens ?? {}),
+          [theme]: {
+            ...DEFAULT_THEME_COLOR_TOKENS[theme],
+            ...tokens,
+          },
+        },
+      }));
+    },
+    [updateResumeStyle]
+  );
+
+  const resetThemeTokens = useCallback(
+    (theme: ResumeTheme) => {
+      updateResumeStyle((prevStyle) => ({
+        ...prevStyle,
+        themeColorTokens: {
+          ...DEFAULT_THEME_COLOR_TOKENS,
+          ...(prevStyle?.themeColorTokens ?? {}),
+          [theme]: { ...DEFAULT_THEME_COLOR_TOKENS[theme] },
+        },
+      }));
+    },
+    [updateResumeStyle]
+  );
+
   return {
     updateSection,
     updateSectionIcon,
@@ -64,6 +107,10 @@ export const useResumeActions = () => {
     toggleSectionVisibility,
     toggleMultiPageMode,
     batchSetSectionsPage,
+    updateTheme,
+    updateThemeTokens,
+    resetThemeTokens,
+    updateCustomStyle,
     updateSectionsOrder,
     addSection,
     deleteSection,
