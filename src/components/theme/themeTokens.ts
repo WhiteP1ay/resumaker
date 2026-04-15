@@ -77,8 +77,16 @@ export const THEME_TOKEN_DEFINITIONS: Record<ResumeTheme, ThemeTokenDefinition[]
     {
       key: 'timelineTitleAccent',
       label: '标题强调色',
-      description: '时间线大标题文字/图标强调色',
+      description: '时间线大标题文字强调色',
       cssVar: '--minimal-timeline-title-accent',
+      defaultValue: '#000000',
+      group: 'timeline',
+    },
+    {
+      key: 'timelineTitleIconColor',
+      label: '标题图标颜色',
+      description: '时间线标题图标颜色（独立于标题文字颜色）',
+      cssVar: '--minimal-timeline-title-icon-color',
       defaultValue: '#000000',
       group: 'timeline',
     },
@@ -144,6 +152,13 @@ export const THEME_TOKEN_DEFINITIONS: Record<ResumeTheme, ThemeTokenDefinition[]
       description: '左栏信息卡背景',
       cssVar: '--split-info-card-bg',
       defaultValue: '#f5f3ff',
+    },
+    {
+      key: 'titleIconColor',
+      label: '标题图标颜色',
+      description: '右侧时间线标题图标颜色（独立于标题文字颜色）',
+      cssVar: '--split-title-icon-color',
+      defaultValue: '#475569',
     },
   ],
 };

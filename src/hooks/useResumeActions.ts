@@ -11,7 +11,14 @@ import {
   updateSectionPropsAtom,
   updateSectionsOrderAtom,
 } from '@/store/resumeStore';
-import type { BasicInfo, ResumeTheme, SectionStyle, ThemeColorTokens, TimelineItem } from '@/types/resume';
+import type {
+  BasicInfo,
+  ResumeTheme,
+  SectionStyle,
+  ThemeColorTokens,
+  TimelineItem,
+  TimelineTitleStyle,
+} from '@/types/resume';
 import { useAtomValue, useSetAtom } from 'jotai';
 import { useCallback } from 'react';
 import { DEFAULT_THEME_COLOR_TOKENS } from '@/components/theme/themeTokens';
@@ -65,6 +72,10 @@ export const useResumeActions = () => {
     updateResumeStyle({ theme });
   };
 
+  const updateTimelineTitleStyle = (timelineTitleStyle: TimelineTitleStyle) => {
+    updateResumeStyle({ timelineTitleStyle });
+  };
+
   const updateCustomStyle = (customCSS: string, sections: SectionStyle[]) => {
     updateResumeStyle({ customCSS, sections });
   };
@@ -108,6 +119,7 @@ export const useResumeActions = () => {
     toggleMultiPageMode,
     batchSetSectionsPage,
     updateTheme,
+    updateTimelineTitleStyle,
     updateThemeTokens,
     resetThemeTokens,
     updateCustomStyle,

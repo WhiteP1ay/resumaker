@@ -151,5 +151,6 @@ export const initialResume: Resume = {
     customCSS: '',
     theme: 'minimal',
     themeColorTokens: DEFAULT_THEME_COLOR_TOKENS,
+    timelineTitleStyle: 'style1',
   },
 };

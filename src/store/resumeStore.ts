@@ -108,6 +108,10 @@ export const updateResumeStyleAtom = atom(
       sections: resume.style?.sections ?? [],
       customCSS: resume.style?.customCSS ?? '',
       theme: resume.style?.theme === 'split' ? 'split' : 'minimal',
+      timelineTitleStyle:
+        resume.style?.timelineTitleStyle === 'style2' || resume.style?.timelineTitleStyle === 'style3'
+          ? resume.style.timelineTitleStyle
+          : 'style1',
       themeColorTokens: {
         ...DEFAULT_THEME_COLOR_TOKENS,
         ...(rawTokens.minimal ? { minimal: { ...DEFAULT_THEME_COLOR_TOKENS.minimal, ...rawTokens.minimal } } : {}),

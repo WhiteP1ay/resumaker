@@ -1,7 +1,7 @@
 import { THEME_TOKEN_DEFINITIONS, getThemeTokens } from '@/components/theme/themeTokens';
 import { useResumeActions } from '@/hooks/useResumeActions';
 import { resumeAtom } from '@/store/resumeStore';
-import type { ResumeTheme } from '@/types/resume';
+import type { ResumeTheme, TimelineTitleStyle } from '@/types/resume';
 import { useAtomValue } from 'jotai';
 import { ChevronDown, ChevronUp, Columns2, RotateCcw, Sparkles } from 'lucide-react';
 import type { ComponentType } from 'react';
@@ -31,8 +31,9 @@ const themeOptions: ThemeOption[] = [
 
 export const ThemeSelectPanel = () => {
   const resume = useAtomValue(resumeAtom);
-  const { updateTheme, updateThemeTokens, resetThemeTokens } = useResumeActions();
+  const { updateTheme, updateTimelineTitleStyle, updateThemeTokens, resetThemeTokens } = useResumeActions();
   const activeTheme = resume.style?.theme ?? 'minimal';
+  const timelineTitleStyle: TimelineTitleStyle = resume.style?.timelineTitleStyle ?? 'style1';
   const [expandedThemes, setExpandedThemes] = useState<Record<ResumeTheme, boolean>>({
     minimal: false,
     split: false,
@@ -172,6 +173,25 @@ export const ThemeSelectPanel = () => {
 
             {isExpanded && (
               <div className="mt-3 border-t border-gray-200 pt-3 space-y-2.5">
+                <div className="rounded-md border border-gray-200 bg-white p-2.5">
+                  <p className="text-xs font-medium text-gray-900">时间线标题样式</p>
+                  <p className="text-[11px] text-gray-500">选择时间线大标题显示方式（样式1/样式2/样式3）</p>
+                  <div className="mt-2 flex items-center gap-4">
+                    {(['style1', 'style2', 'style3'] as const).map((styleKey) => (
+                      <label key={styleKey} className="inline-flex items-center gap-1.5 text-xs text-gray-700">
+                        <input
+                          type="radio"
+                          name="timeline-title-style"
+                          value={styleKey}
+                          checked={timelineTitleStyle === styleKey}
+                          onChange={() => updateTimelineTitleStyle(styleKey)}
+                          className="h-3.5 w-3.5 border-gray-300 text-gray-900 focus:ring-gray-400"
+                        />
+                        <span>{styleKey === 'style1' ? '样式1' : styleKey === 'style2' ? '样式2' : '样式3'}</span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
                 <div className="flex justify-end">
                   <button
                     type="button"

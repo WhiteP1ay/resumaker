@@ -48,6 +48,7 @@ export interface SectionStyle {
 
 export type ResumeTheme = 'minimal' | 'split';
 export type ThemeColorTokens = Record<string, string>;
+export type TimelineTitleStyle = 'style1' | 'style2' | 'style3';
 
 export interface ThemeColorTokenMap {
   minimal?: ThemeColorTokens;
@@ -59,6 +60,7 @@ export interface ResumeStyle {
   customCSS?: string;
   theme?: ResumeTheme;
   themeColorTokens?: ThemeColorTokenMap;
+  timelineTitleStyle?: TimelineTitleStyle;
 }
 
 export interface Resume {
