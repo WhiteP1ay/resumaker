@@ -1,5 +1,6 @@
 {
   "recommendations": [
+    "biomejs.biome",
     "esbenp.prettier-vscode",
     "dbaeumer.vscode-eslint",
     "bradlc.vscode-tailwindcss",
@@ -10,7 +11,5 @@
     "PKief.material-icon-theme",
     "usernamehw.errorlens"
   ],
-  "unwantedRecommendations": [
-    "ms-vscode.vscode-js-profile-flame"
-  ]
+  "unwantedRecommendations": ["ms-vscode.vscode-js-profile-flame"]
 }

@@ -79,7 +79,6 @@ export const BasicInfoCustomFieldItem = ({
           </div>
         </div>
 
-        {/* 图标选择 */}
         <div>
           <IconPicker value={editingIcon} onChange={setEditingIcon} label="图标" />
         </div>
@@ -103,7 +102,6 @@ export const BasicInfoCustomFieldItem = ({
       className="flex items-center justify-between p-3 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors group"
     >
       <div className="flex items-center space-x-3">
-        {/* 拖拽手柄 */}
         <div
           {...attributes}
           {...listeners}

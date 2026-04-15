@@ -1,6 +1,3 @@
-/**
- * 头像裁剪组件
- */
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -77,5 +74,4 @@ export const AvatarCropper = ({
   );
 };
 
-// 默认导出用于懒加载
 export default AvatarCropper;

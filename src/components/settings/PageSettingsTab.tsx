@@ -50,7 +50,7 @@ export const PageSettingsTab = ({ pageSettings }: PageSettingsTabProps) => {
           </div>
           <div className="flex gap-2">
             {!isMultiPageEnabled ? (
-              <Button onClick={handleEnableMultiPage} className="bg-green-600 hover:bg-green-700">
+              <Button onClick={handleEnableMultiPage}>
                 启用多页
               </Button>
             ) : (

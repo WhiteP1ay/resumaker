@@ -14,7 +14,6 @@ export const LayoutSelector = ({ onLayoutChange }: LayoutSelectorProps) => {
       <Button
         onClick={() => onLayoutChange('top-bottom')}
         size="sm"
-        className="flex items-center space-x-2 px-3 py-1.5 text-xs transition-all bg-blue-600 text-white shadow-sm hover:bg-blue-700"
       >
         <LayoutGrid className="h-3 w-3" />
         <span className="hidden sm:inline">简约主题</span>

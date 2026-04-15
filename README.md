@@ -46,30 +46,30 @@ Q：为什么不是别的 xx 简历制作工具
 
 ### 环境要求
 - Node.js >= 18.0.0
-- npm 或 yarn 或 pnpm
+- pnpm (推荐) 或 npm 或 yarn
 
 ### 安装依赖
 
 ```bash
-# 使用 npm
-npm install
+# 使用 pnpm (推荐)
+pnpm install
 ```
 
 ### 开发运行
 
 ```bash
 # 启动开发服务器
-npm run dev
+pnpm dev
 ```
 
 ### 构建部署
 
 ```bash
 # 构建生产版本
-npm run build
+pnpm build
 
 # 预览构建结果
-npm run preview
+pnpm preview
 ```
 
 ### 提交规范

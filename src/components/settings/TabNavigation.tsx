@@ -31,7 +31,7 @@ export const TabNavigation = ({ activeTab, onTabChange }: TabNavigationProps) =>
             variant="ghost"
             className={`flex items-center gap-2 px-4 py-2 text-sm font-medium border-b-2 rounded-none h-auto transition-colors ${
               activeTab === tab.id
-                ? 'border-blue-500 text-blue-600 bg-transparent hover:bg-blue-50'
+                ? 'border-gray-800 text-gray-900 bg-transparent hover:bg-gray-50'
                 : 'border-transparent text-gray-500 hover:text-gray-700 hover:bg-gray-50'
             }`}
           >

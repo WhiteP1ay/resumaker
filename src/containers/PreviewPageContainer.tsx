@@ -25,6 +25,11 @@ export const PreviewPageContainer = () => {
       />
 
       <PreviewPageFooter />
+
+      {/* 注入自定义CSS */}
+      {resume.style?.customCSS && (
+        <style id="resume-custom-css" dangerouslySetInnerHTML={{ __html: resume.style.customCSS }} />
+      )}
     </div>
   );
 };

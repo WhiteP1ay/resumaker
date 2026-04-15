@@ -16,13 +16,13 @@ export const PrintTipBar = ({ onPrint, onExportPdf }: PrintTipBarProps) => {
   const { scale, onScaleChange } = usePrintScale();
 
   return (
-    <div className="bg-blue-600 text-white p-3 text-center print:hidden">
+    <div className="bg-gray-800 text-white p-3 text-center print:hidden">
       <div className="flex items-center justify-between space-x-4 max-w-4xl px-4 mx-auto">
         <div className="flex items-center space-x-2">
           <span className="text-sm">缩放比例</span>
           <Tooltip>
             <TooltipTrigger asChild>
-              <CircleQuestionMark className="w-4 h-4 text-blue-200"></CircleQuestionMark>
+              <CircleQuestionMark className="w-4 h-4 text-white/70 hover:text-white cursor-help" />
             </TooltipTrigger>
             <TooltipContent>
               <p>通过修改缩放比例，可以控制每页简历内容的显示大小。</p>
@@ -32,7 +32,7 @@ export const PrintTipBar = ({ onPrint, onExportPdf }: PrintTipBarProps) => {
             defaultValue={[scale]}
             max={100}
             step={1}
-            className="w-20"
+            className="w-20 cursor-pointer [&_[data-slot=slider-track]]:bg-white/30 [&_[data-slot=slider-range]]:bg-white [&_[data-slot=slider-thumb]]:border-white [&_[data-slot=slider-thumb]]:bg-white [&_[data-slot=slider-thumb]]:cursor-grab [&_[data-slot=slider-thumb]]:active:cursor-grabbing [&_[data-slot=slider-thumb]]:hover:ring-white/50"
             onValueChange={(value) => onScaleChange(value[0])}
           ></Slider>
           {scale}%
@@ -44,7 +44,7 @@ export const PrintTipBar = ({ onPrint, onExportPdf }: PrintTipBarProps) => {
                 onClick={onPrint}
                 variant="outline"
                 size="sm"
-                className="bg-white text-blue-600 hover:bg-gray-100"
+                className="border-white text-white hover:bg-white/10 hover:text-white"
               >
                 <Printer className="h-4 w-4 mr-2" />
                 打印简历
@@ -61,7 +61,7 @@ export const PrintTipBar = ({ onPrint, onExportPdf }: PrintTipBarProps) => {
                 onClick={onExportPdf}
                 variant="outline"
                 size="sm"
-                className="bg-white text-blue-600 hover:bg-gray-100"
+                className="border-white text-white hover:bg-white/10 hover:text-white"
               >
                 <FileJson className="h-4 w-4 mr-2" />
                 导出JSON

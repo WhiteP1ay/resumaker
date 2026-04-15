@@ -1,4 +1,5 @@
 import { ClearConfirmDialog } from '@/components/dialogs/ClearConfirmDialog';
+import { CustomCssEditorDialog } from '@/components/dialogs/CustomCssEditorDialog';
 import { ResumeSettingsDialog } from '@/components/dialogs/ResumeSettingsDialog';
 import { ActionButtons } from '@/components/layout/ActionButtons';
 import { AppFooter } from '@/components/layout/AppFooter';
@@ -14,6 +15,10 @@ export const MainPageContainer = () => {
   const { clearResume } = useResumeActions();
   const [showClearDialog, setShowClearDialog] = useState(false);
   const [showResumeSettings, setShowResumeSettings] = useState(false);
+  const [showCustomStyle, setShowCustomStyle] = useState(false);
+
+  const style = resume.style;
+  const resumeStyleCSS = style?.customCSS;
 
   const handlePreview = () => {
     window.open('/resume/preview', '_blank');
@@ -29,12 +34,13 @@ export const MainPageContainer = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50">
+    <div className="min-h-screen bg-gray-50">
       <AppHeader>
         <ActionButtons
           onPreview={handlePreview}
           onClear={() => setShowClearDialog(true)}
           onManageResume={handleManageResume}
+          onCustomStyle={() => setShowCustomStyle(true)}
         />
       </AppHeader>
 
@@ -52,6 +58,16 @@ export const MainPageContainer = () => {
         isOpen={showResumeSettings}
         onClose={() => setShowResumeSettings(false)}
       />
+
+      <CustomCssEditorDialog
+        isOpen={showCustomStyle}
+        onClose={() => setShowCustomStyle(false)}
+      />
+
+      {/* 注入自定义CSS */}
+      {resumeStyleCSS && (
+        <style id="resume-custom-css" dangerouslySetInnerHTML={{ __html: resumeStyleCSS }} />
+      )}
 
       <AppFooter />
     </div>

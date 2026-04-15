@@ -1,10 +1,4 @@
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { usePageSettings } from '@/hooks/components/usePageSettings';
 import { Settings as SettingsIcon } from 'lucide-react';
 import { useEffect, useState } from 'react';
@@ -20,39 +14,37 @@ interface ResumeSettingsDialogProps {
 export const ResumeSettingsDialog = ({ isOpen, onClose }: ResumeSettingsDialogProps) => {
   const [activeTab, setActiveTab] = useState<'modules' | 'pages'>('modules');
 
-  // 在顶层管理页面设置状态
   const pageSettings = usePageSettings();
 
-  // 处理对话框关闭
   const handleClose = () => {
-    pageSettings.applyPageAssignments(); // 应用页面设置更改
+    pageSettings.applyPageAssignments();
     onClose();
   };
 
   useEffect(() => {
     pageSettings.applyPageAssignments();
-  }, [activeTab]);
+  }, [pageSettings]);
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
-      <DialogContent className="max-w-5xl max-h-[90vh] overflow-hidden flex flex-col">
-        <DialogHeader>
-          <DialogTitle className="flex items-center gap-3 text-xl font-semibold text-gray-900">
-            <div className="p-2 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg">
-              <SettingsIcon className="h-6 w-6 text-white" />
+      <DialogContent className="max-w-lg max-h-[85vh] overflow-hidden flex flex-col gap-0 p-0">
+        {/* Header */}
+        <DialogHeader className="px-5 pt-5 pb-4 border-b border-gray-100">
+          <DialogTitle className="flex items-center gap-2.5 text-base font-semibold text-gray-900">
+            <div className="w-7 h-7 bg-gray-800 rounded-md flex items-center justify-center shrink-0">
+              <SettingsIcon className="h-3.5 w-3.5 text-white" />
             </div>
-            <span>简历设置</span>
+            简历设置
           </DialogTitle>
-          <DialogDescription>
-            管理简历的模块和页面设置，拖拽调整顺序，关闭时自动保存所有更改。
-          </DialogDescription>
         </DialogHeader>
 
-        {/* 标签页导航 */}
-        <TabNavigation activeTab={activeTab} onTabChange={setActiveTab} />
+        {/* Tab Navigation */}
+        <div className="px-5 pt-3">
+          <TabNavigation activeTab={activeTab} onTabChange={setActiveTab} />
+        </div>
 
-        {/* 标签页内容 */}
-        <div className="space-y-6 flex-1 overflow-y-auto">
+        {/* Content */}
+        <div className="flex-1 overflow-y-auto px-5 pb-5 pt-4">
           {activeTab === 'modules' && <ModuleManagementTab />}
           {activeTab === 'pages' && <PageSettingsTab pageSettings={pageSettings} />}
         </div>

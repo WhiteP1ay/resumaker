@@ -1,6 +1,3 @@
-/**
- * 文件上传按钮
- */
 import { Button } from '@/components/ui/button';
 import { useRef } from 'react';
 
@@ -31,7 +28,6 @@ export const FileUploadButton = ({
     const file = event.target.files?.[0];
     if (file) {
       onFileSelect(file);
-      // 清空input，允许重复选择同一文件
       if (fileInputRef.current) {
         fileInputRef.current.value = '';
       }

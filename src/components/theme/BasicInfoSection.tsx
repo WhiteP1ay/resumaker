@@ -12,9 +12,10 @@ import { BasicInfoSectionItem } from './BasicInfoSectionItem';
 interface BasicInfoSectionProps {
   section: ResumeSection;
   isEditable: boolean;
+  className?: string;
 }
 
-export const BasicInfoSection = ({ section, isEditable }: BasicInfoSectionProps) => {
+export const BasicInfoSection = ({ section, isEditable, className }: BasicInfoSectionProps) => {
   const data = section.data as BasicInfo;
 
   const {
@@ -30,7 +31,7 @@ export const BasicInfoSection = ({ section, isEditable }: BasicInfoSectionProps)
   return (
     <>
       {/* 简约风格头部区域 */}
-      <div className="relative group px-8 pt-8 pb-6 print:px-6 print:pt-6 print:pb-4">
+      <div className={`relative group px-8 pt-8 pb-6 print:px-6 print:pt-6 print:pb-4 ${className || ''}`}>
         {/* 编辑按钮 */}
         {isEditable && (
           <Button
@@ -48,40 +49,44 @@ export const BasicInfoSection = ({ section, isEditable }: BasicInfoSectionProps)
           {/* 左侧：姓名和基本信息 */}
           <div className="flex-1 pr-6 flex flex-col items-center px-[3rem]">
             {/* 姓名 */}
-            <h1 className="text-4xl font-bold text-gray-900 mb-3 print:mb-2">
+            <h1 className="text-4xl font-bold text-gray-900 mb-3 print:mb-2 name">
               {data.name || '姓名'}
             </h1>
 
             {/* 基本信息行 */}
-            <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-gray-600 print:gap-x-4">
+            <div className="info-row flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-gray-600 print:gap-x-4">
               {/* 性别和年龄 */}
               {(data.gender || data.age) && (
-                <BasicInfoSectionItem icon={User}>
+                <BasicInfoSectionItem icon={User} className="item">
                   {formatGenderAge(data.gender, data.age)}
                 </BasicInfoSectionItem>
               )}
 
               {/* 电话 */}
               {hasValue(data.phone) && (
-                <BasicInfoSectionItem icon={Phone}>{data.phone}</BasicInfoSectionItem>
+                <BasicInfoSectionItem icon={Phone} className="item">
+                  {data.phone}
+                </BasicInfoSectionItem>
               )}
 
               {/* 邮箱 */}
               {hasValue(data.email) && (
-                <BasicInfoSectionItem icon={Mail}>{data.email}</BasicInfoSectionItem>
+                <BasicInfoSectionItem icon={Mail} className="item">
+                  {data.email}
+                </BasicInfoSectionItem>
               )}
             </div>
 
             {/* 第二行：自定义字段 */}
             {data.customFields && data.customFields.length > 0 && (
-              <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-gray-600 mt-2 print:mt-1">
+              <div className="info-row flex flex-wrap gap-x-6 gap-y-2 text-sm text-gray-600 mt-2 print:mt-1">
                 {formatCustomFields(data.customFields)}
               </div>
             )}
           </div>
 
           {/* 右侧：头像 */}
-          <div className="shrink-0 hidden md:block print:block">
+          <div className="avatar shrink-0 hidden md:block print:block">
             <AvatarDisplay src={data.avatar} alt={data.name || '头像'} size="md" />
           </div>
         </div>

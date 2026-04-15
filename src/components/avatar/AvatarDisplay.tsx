@@ -1,7 +1,3 @@
-/**
- * 头像显示组件
- */
-
 import clsx from 'clsx';
 
 interface AvatarDisplayProps {
@@ -29,7 +25,7 @@ export const AvatarDisplay = ({
         <div
           className={clsx(
             `${sizeClasses[size]} rounded-lg overflow-hidden ${className}`,
-            'bg-gray-200 border border-gray-300'
+            'bg-gray-200 border border-gray-300',
           )}
         >
           <img src={src} alt={alt} className="w-full h-full object-cover" />

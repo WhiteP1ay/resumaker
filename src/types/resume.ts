@@ -30,27 +30,25 @@ export interface TimelineItem {
   description: string;
 }
 
-// 新增：列表项类型
-export interface ListItem {
-  id: string;
-  content: string;
-}
-
-// 新增：纯文本内容类型
-export interface TextContent {
-  content: string;
-}
-
 export interface ResumeSection {
   id: string;
   title: string;
   iconName: string;
-  type: 'basic' | 'timeline' | 'list' | 'text' | 'custom';
-  editorType?: 'timeline' | 'list' | 'text';
+  type: 'basic' | 'timeline';
   visible: boolean;
   order: number;
-  pageNumber?: number; // 新增：指定该模块在第几页显示 (1 或 2)
-  data: BasicInfo | TimelineItem[] | ListItem[] | TextContent | Record<string, unknown>;
+  pageNumber?: number;
+  data: BasicInfo | TimelineItem[];
+}
+
+export interface SectionStyle {
+  sectionId: string;
+  className?: string;
+}
+
+export interface ResumeStyle {
+  sections: SectionStyle[];
+  customCSS?: string;
 }
 
 export interface Resume {
@@ -60,9 +58,10 @@ export interface Resume {
   template: string;
   layout: 'side-by-side' | 'top-bottom';
   pageSettings?: {
-    enableMultiPage: boolean; // 是否启用多页模式
-    totalPages: number; // 总页数，目前支持1-2页
+    enableMultiPage: boolean;
+    totalPages: number;
   };
+  style?: ResumeStyle;
 }
 
 export interface IconOption {

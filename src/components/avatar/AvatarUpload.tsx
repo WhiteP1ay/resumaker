@@ -1,6 +1,3 @@
-/**
- * 头像上传组件
- */
 import { Button } from '@/components/ui/button';
 import { useAvatarUpload } from '@/hooks/components/useAvatarUpload';
 import { Crop } from 'lucide-react';
@@ -14,7 +11,7 @@ const AvatarCropper = React.lazy(() => import('./AvatarCropper'));
 // 简单的内联loading
 const CropperLoading = () => (
   <div className="flex items-center justify-center py-4">
-    <div className="w-5 h-5 border-2 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+    <div className="w-5 h-5 border-2 border-blue-600 border-t-transparent rounded-full animate-spin" />
   </div>
 );
 
@@ -37,12 +34,10 @@ export const AvatarUpload = ({ currentAvatar, onAvatarChange }: AvatarUploadProp
 
   return (
     <div className="flex flex-col items-center space-y-4">
-      {/* 头像预览区域 */}
       <div className="relative">
         <AvatarDisplay src={previewUrl} alt="头像预览" size="lg" />
       </div>
 
-      {/* 操作按钮 */}
       <div className="flex space-x-2">
         <FileUploadButton onFileSelect={(file) => handleFileSelect(file)}>
           {previewUrl ? '更换头像' : '选择头像'}

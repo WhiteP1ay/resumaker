@@ -1,9 +1,8 @@
 import { Button } from '@/components/ui/button';
-import { Label } from '@/components/ui/label';
 import { useSectionManager } from '@/hooks/components/useSectionManager';
 import { DndContext } from '@dnd-kit/core';
 import { SortableContext } from '@dnd-kit/sortable';
-import { GripVertical, Plus, Star } from 'lucide-react';
+import { GripVertical, Plus } from 'lucide-react';
 import { DraggableSectionItem } from '../dialogs/DraggableSectionItem';
 
 export const ModuleManagementTab = () => {
@@ -18,26 +17,31 @@ export const ModuleManagementTab = () => {
     saveEditing,
     cancelEditing,
     updateSectionIcon,
-    getEditorType,
-    updateEditorType,
     dragConfig,
   } = useSectionManager();
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-3">
+      {/* Header */}
       <div className="flex items-center justify-between">
-        <Label className="text-sm font-medium text-gray-700">
-          模块列表 ({managedSections.length})
-        </Label>
-        <div className="text-xs text-gray-500 flex items-center gap-1">
+        <div className="flex items-center gap-1.5 text-xs text-gray-400">
           <GripVertical className="h-3 w-3" />
-          拖拽调整顺序
+          <span>拖拽调整顺序</span>
         </div>
+        <Button
+          onClick={addCustomSection}
+          size="sm"
+          variant="outline"
+        >
+          <Plus className="h-3.5 w-3.5 mr-1" />
+          添加模块
+        </Button>
       </div>
 
+      {/* Section List */}
       <DndContext sensors={dragConfig.sensors} onDragEnd={dragConfig.onDragEnd}>
         <SortableContext items={dragConfig.sortableItems} strategy={dragConfig.strategy}>
-          <div className="space-y-3">
+          <div className="space-y-2">
             {managedSections.map((section) => (
               <DraggableSectionItem
                 key={section.id}
@@ -49,9 +53,7 @@ export const ModuleManagementTab = () => {
                 onCancelEditing={cancelEditing}
                 onTitleChange={setEditingTitle}
                 onIconChange={(iconName) => updateSectionIcon(section.id, iconName)}
-                onEditorTypeChange={(editorType) => updateEditorType(section.id, editorType)}
                 onDelete={() => deleteSection(section.id)}
-                getEditorType={getEditorType}
               />
             ))}
           </div>
@@ -59,29 +61,10 @@ export const ModuleManagementTab = () => {
       </DndContext>
 
       {managedSections.length === 0 && (
-        <div className="text-center py-8 text-gray-500">
-          <Star className="h-12 w-12 mx-auto mb-4 text-gray-300" />
-          <p>还没有自定义模块</p>
-          <p className="text-sm">点击下方按钮添加第一个模块</p>
+        <div className="text-center py-10 text-gray-400">
+          <p className="text-sm">还没有模块，点击"添加模块"开始</p>
         </div>
       )}
-
-      <div className="border-t pt-6">
-        <div className="flex items-center justify-between">
-          <Label className="text-sm font-medium text-gray-700">添加新模块</Label>
-          <Button
-            onClick={addCustomSection}
-            size="sm"
-            className="bg-blue-600 hover:bg-blue-700 text-white"
-          >
-            <Plus className="h-4 w-4 mr-1" />
-            添加模块
-          </Button>
-        </div>
-        <p className="text-xs text-gray-500 mt-2">
-          新添加的模块将显示在模块列表的最后，你可以通过拖拽调整位置。
-        </p>
-      </div>
     </div>
   );
 };

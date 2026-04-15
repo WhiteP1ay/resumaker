@@ -1,13 +1,10 @@
-/**
- * 基础信息编辑器 - 自动保存版本
- */
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
 import { useAutoSaveDialog } from '@/hooks/useAutoSaveDialog';
 import type { BasicInfo, CustomField } from '@/types/resume';
-import { DndContext, PointerSensor, useSensor, useSensors, type DragEndEvent } from '@dnd-kit/core';
-import { arrayMove, SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
+import { DndContext, type DragEndEvent, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
+import { SortableContext, arrayMove, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { GripVertical, Plus } from 'lucide-react';
 import { useState } from 'react';
 import { AvatarUpload } from '../avatar/AvatarUpload';
@@ -22,16 +19,14 @@ interface BasicInfoEditorProps {
 }
 
 export const BasicInfoEditor = ({ isOpen, onClose, initialData, onSave }: BasicInfoEditorProps) => {
-  // 配置拖拽传感器
   const sensors = useSensors(
     useSensor(PointerSensor, {
       activationConstraint: {
-        distance: 8, // 移动8px才开始拖拽，避免误触
+        distance: 8,
       },
-    })
+    }),
   );
 
-  // 使用通用的自动保存对话框 Hook
   const {
     data: formData,
     setData: setFormData,
