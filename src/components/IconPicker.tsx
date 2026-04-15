@@ -2,6 +2,7 @@
  * 预设图标选择器 - 替换自选图标功能，提升性能
  */
 import { Button } from '@/components/ui/button';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
 import {
   Award,
@@ -139,7 +140,7 @@ export const IconPicker: React.FC<IconPickerProps> = ({ value, onChange, label =
         <Button
           type="button"
           variant="outline"
-          onClick={() => setIsOpen(!isOpen)}
+          onClick={() => setIsOpen(true)}
           className="w-full justify-start h-10"
         >
           {selectedIcon ? (
@@ -152,33 +153,38 @@ export const IconPicker: React.FC<IconPickerProps> = ({ value, onChange, label =
           )}
         </Button>
 
-        {isOpen && (
-          <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-gray-200 rounded-md shadow-lg z-50 max-h-80 overflow-y-auto">
-            <div className="grid grid-cols-6 gap-1 p-3">
-              {PRESET_ICONS.map((iconItem) => (
-                <button
-                  key={iconItem.name}
-                  type="button"
-                  onClick={() => {
-                    onChange(iconItem.name);
-                    setIsOpen(false);
-                  }}
-                  className={`flex flex-col items-center gap-1 p-2 rounded hover:bg-gray-100 transition-colors text-xs ${
-                    value === iconItem.name ? 'bg-blue-50 text-blue-600' : 'text-gray-600'
-                  }`}
-                  title={iconItem.label}
-                >
-                  <iconItem.icon className="h-4 w-4" />
-                  <span className="truncate text-[10px] leading-tight">{iconItem.label}</span>
-                </button>
-              ))}
+        <Dialog open={isOpen} onOpenChange={setIsOpen}>
+          <DialogContent className="max-w-2xl p-0">
+            <DialogHeader className="px-6 pt-6 pb-2">
+              <DialogTitle className="text-base">选择图标</DialogTitle>
+              <DialogDescription>点击图标即可应用到当前模块标题。</DialogDescription>
+            </DialogHeader>
+            <div className="max-h-[28rem] overflow-y-auto px-6 pb-6">
+              <div className="grid grid-cols-7 gap-2">
+                {PRESET_ICONS.map((iconItem) => (
+                  <button
+                    key={iconItem.name}
+                    type="button"
+                    onClick={() => {
+                      onChange(iconItem.name);
+                      setIsOpen(false);
+                    }}
+                    className={`flex flex-col items-center gap-1.5 p-2.5 rounded-md border transition-colors text-xs ${
+                      value === iconItem.name
+                        ? 'bg-blue-50 text-blue-600 border-blue-200'
+                        : 'text-gray-600 border-gray-100 hover:bg-gray-50'
+                    }`}
+                    title={iconItem.label}
+                  >
+                    <iconItem.icon className="h-4 w-4" />
+                    <span className="truncate text-[10px] leading-tight">{iconItem.label}</span>
+                  </button>
+                ))}
+              </div>
             </div>
-          </div>
-        )}
+          </DialogContent>
+        </Dialog>
       </div>
-
-      {/* 点击外部关闭 */}
-      {isOpen && <div className="fixed inset-0 z-40" onClick={() => setIsOpen(false)} />}
     </div>
   );
 };

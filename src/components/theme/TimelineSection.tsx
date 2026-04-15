@@ -1,11 +1,8 @@
 import { IconRenderer } from '@/components/IconPicker';
-import { TimelineSectionManager } from '@/components/editors/TimelineSectionManager';
 import { TimelineContent } from '@/components/theme/TimelineContentRenderer';
-import { Button } from '@/components/ui/button';
 import { useResumeEditor } from '@/hooks/components/useResumeEditor';
 import type { ResumeSection, TimelineItem } from '@/types/resume';
-import { Settings2 } from 'lucide-react';
-import React, { useState } from 'react';
+import React from 'react';
 
 interface TimelineSectionProps {
   section: ResumeSection;
@@ -19,7 +16,6 @@ export const TimelineSection: React.FC<TimelineSectionProps> = ({
   className,
 }) => {
   const { handleTimelineSave } = useResumeEditor(section.id);
-  const [isManagerOpen, setIsManagerOpen] = useState(false);
 
   const handleUpdateItem = (updatedItem: TimelineItem) => {
     const items = section.data as TimelineItem[];
@@ -42,17 +38,6 @@ export const TimelineSection: React.FC<TimelineSectionProps> = ({
                 <IconRenderer iconName={section.iconName} className="h-4 w-4" />
               </div>
             )}
-            {isEditable && (
-              <Button
-                variant="ghost"
-                size="icon"
-                className="ml-auto opacity-0 group-hover/header:opacity-100 transition-opacity duration-200 hover:bg-gray-100 h-7 w-7 print:hidden"
-                onClick={() => setIsManagerOpen(true)}
-                title="管理条目"
-              >
-                <Settings2 className="h-3.5 w-3.5 text-gray-500" />
-              </Button>
-            )}
           </div>
 
           <div className="mt-[.5rem]">
@@ -64,17 +49,6 @@ export const TimelineSection: React.FC<TimelineSectionProps> = ({
           </div>
         </div>
       </div>
-
-      {isEditable && (
-        <TimelineSectionManager
-          isOpen={isManagerOpen}
-          onClose={() => setIsManagerOpen(false)}
-          initialData={section.data as TimelineItem[]}
-          onSave={(data, iconName) => handleTimelineSave(data, iconName)}
-          title={section.title}
-          currentIcon={section.iconName || 'briefcase'}
-        />
-      )}
     </>
   );
 };

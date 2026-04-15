@@ -1,7 +1,6 @@
 /**
  * 头像裁剪器业务逻辑 Hook
  */
-import { useErrorHandler } from '@/hooks/useErrorHandler';
 import { useCallback, useRef, useState } from 'react';
 import { type Crop, centerCrop, makeAspectCrop } from 'react-image-crop';
 
@@ -12,7 +11,10 @@ function canvasToBase64(canvas: HTMLCanvasElement): string {
 // 辅助函数：获取裁剪后的图片
 async function getCroppedImg(image: HTMLImageElement, crop: Crop): Promise<string> {
   const canvas = document.createElement('canvas');
-  const ctx = canvas.getContext('2d')!;
+  const ctx = canvas.getContext('2d');
+  if (!ctx) {
+    throw new Error('Canvas 2D context is not available');
+  }
 
   const scaleX = image.naturalWidth / image.width;
   const scaleY = image.naturalHeight / image.height;
@@ -42,7 +44,6 @@ export const useAvatarCropper = (
   const [crop, setCrop] = useState<Crop>();
   const [completedCrop, setCompletedCrop] = useState<Crop>();
   const imgRef = useRef<HTMLImageElement>(null);
-  const { showError } = useErrorHandler();
 
   // 图片加载完成时设置默认裁剪区域
   const onImageLoad = useCallback((e: React.SyntheticEvent<HTMLImageElement>) => {
@@ -86,7 +87,7 @@ export const useAvatarCropper = (
         onClose();
       } catch (error) {
         console.error('Failed to crop image:', error);
-        showError('请上传头像后裁剪');
+        window.alert('请上传头像后裁剪');
       }
     }
   };

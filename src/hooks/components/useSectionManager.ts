@@ -1,5 +1,5 @@
 import { useResumeActions } from '@/hooks/useResumeActions';
-import type { ResumeSection } from '@/types/resume';
+import type { ResumeSection, TimelineItem } from '@/types/resume';
 import type { DragEndEvent } from '@dnd-kit/core';
 import { PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
 import { arrayMove, verticalListSortingStrategy } from '@dnd-kit/sortable';
@@ -58,7 +58,21 @@ export const useSectionManager = () => {
     setEditingTitle('');
   };
 
+  /**
+   * 新建自定义模块时预置一个默认条目。
+   * 避免空模块在编辑流程中没有可操作入口，导致用户无法继续新增条目。
+   */
   const addCustomSection = () => {
+    const defaultItem: TimelineItem = {
+      id: `${Date.now()}-1`,
+      title: '新条目',
+      subtitle: '',
+      secondarySubtitle: '',
+      startDate: '',
+      endDate: '',
+      description: '',
+    };
+
     const newSection: ResumeSection = {
       id: `custom-${Date.now()}`,
       title: '新模块',
@@ -66,7 +80,8 @@ export const useSectionManager = () => {
       type: 'timeline',
       visible: true,
       order: managedSections.length + 2,
-      data: [],
+      // 预置默认条目，保证创建后立刻可编辑。
+      data: [defaultItem],
     };
     addSection(newSection);
     startEditing(newSection);
