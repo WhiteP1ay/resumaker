@@ -23,8 +23,7 @@ Resumaker 是纯前端 SPA（React + TypeScript + Vite）
 部署基础路径为 `/resume/`
 
 **路由**（React Router，basename `/resume`）：
-- `/` → 编辑器（MainPage → MainPageContainer）
-- `/preview` → 只读预览 + 打印（PreviewPage，懒加载）
+- `/` → 编辑器（MainPage），打印直接通过顶部按钮触发 `window.print()`，由 `print:` 样式控制仅输出简历内容
 
 **状态管理**（Jotai + `atomWithStorage`）：
 - `src/store/resumeStore.ts` 中的单一 `resumeAtom` 存储完整简历数据，自动同步到 localStorage。

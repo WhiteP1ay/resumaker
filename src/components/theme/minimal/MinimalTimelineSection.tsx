@@ -24,7 +24,7 @@ export const MinimalTimelineSection = ({
     const items = section.data as TimelineItem[];
     handleTimelineSave(
       items.map((i) => (i.id === updatedItem.id ? updatedItem : i)),
-      section.iconName
+      section.iconName,
     );
   };
 
@@ -70,7 +70,10 @@ export const MinimalTimelineSection = ({
             >
               <IconRenderer iconName={section.iconName || 'star'} className="h-4 w-4" />
             </div>
-            <h2 className="section-title font-bold leading-tight" style={{ color: titleColor, fontSize: titleFontSize }}>
+            <h2
+              className="section-title font-bold leading-tight"
+              style={{ color: titleColor, fontSize: titleFontSize }}
+            >
               {section.title}
             </h2>
           </div>
@@ -80,7 +83,7 @@ export const MinimalTimelineSection = ({
 
     return (
       <div
-        className="flex items-center rounded-lg px-3 py-2 border group/header"
+        className="flex items-center rounded-lg px-3 py-1 border group/header"
         style={{
           backgroundColor: 'var(--minimal-timeline-title-bg)',
           borderColor: 'var(--minimal-timeline-title-border)',
@@ -92,7 +95,10 @@ export const MinimalTimelineSection = ({
           style={{ backgroundColor: titlePrefixColor }}
           aria-hidden="true"
         />
-        <h2 className="section-title font-bold leading-tight" style={{ color: titleColor, fontSize: titleFontSize }}>
+        <h2
+          className="section-title font-bold leading-tight"
+          style={{ color: titleColor, fontSize: titleFontSize }}
+        >
           {section.title}
         </h2>
         {section.iconName && (
@@ -107,16 +113,12 @@ export const MinimalTimelineSection = ({
   return (
     <>
       <div className={`relative ${className || ''}`}>
-        <div className="mb-6">
-          {renderTitle()}
-          <div className="mt-3">
-            <TimelineContent
-              data={section.data as TimelineItem[]}
-              isEditable={isEditable}
-              onUpdateItem={handleUpdateItem}
-            />
-          </div>
-        </div>
+        {renderTitle()}
+        <TimelineContent
+          data={section.data as TimelineItem[]}
+          isEditable={isEditable}
+          onUpdateItem={handleUpdateItem}
+        />
       </div>
     </>
   );

@@ -47,7 +47,7 @@ export const ResumeSettingsSidebar = ({ onClearResume }: ResumeSettingsSidebarPr
 
   return (
     <aside
-      className={`sticky top-16 self-start min-h-[40rem] max-h-[calc(100vh-5rem)] shrink-0 bg-white border border-gray-200 rounded-xl shadow-sm transition-all duration-300 ${
+      className={`sticky top-16 self-start h-[40rem] max-h-[calc(100vh-5rem)] shrink-0 bg-white border border-gray-200 rounded-xl shadow-sm transition-all duration-300 print:hidden ${
         collapsed ? 'w-16' : 'w-[340px]'
       }`}
     >

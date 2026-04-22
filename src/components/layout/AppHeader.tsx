@@ -8,7 +8,7 @@ interface AppHeaderProps {
 
 export const AppHeader = ({ children }: AppHeaderProps) => {
   return (
-    <header className="bg-white/85 backdrop-blur-md border-b border-gray-200/80 sticky top-0 z-40 shadow-sm">
+    <header className="bg-white/85 backdrop-blur-md border-b border-gray-200/80 sticky top-0 z-40 shadow-sm print:hidden">
       <div className="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
         {/* Logo */}
         <div className="flex items-center gap-2.5 shrink-0">

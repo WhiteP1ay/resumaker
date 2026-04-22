@@ -2,6 +2,7 @@ import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
@@ -28,9 +29,9 @@ export const ClearConfirmDialog = ({ isOpen, onClose, onConfirm }: ClearConfirmD
         </DialogHeader>
 
         <div className="py-2 space-y-2">
-          <p className="text-sm text-gray-600">
+          <DialogDescription className="text-sm text-gray-600">
             此操作将删除所有已保存的简历数据并恢复到初始状态，无法撤销。
-          </p>
+          </DialogDescription>
           <p className="text-xs text-red-500 font-medium">建议操作前先导出 JSON 备份。</p>
         </div>
 

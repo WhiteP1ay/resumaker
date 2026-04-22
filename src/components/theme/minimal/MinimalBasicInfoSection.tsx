@@ -18,8 +18,15 @@ export const MinimalBasicInfoSection = ({
   className,
 }: MinimalBasicInfoSectionProps) => {
   const data = section.data as BasicInfo;
-  const { isEditing, startEditing, closeEditing, handleSave, formatGenderAge, formatCustomFields, hasValue } =
-    useBasicInfoSection(section.id);
+  const {
+    isEditing,
+    startEditing,
+    closeEditing,
+    handleSave,
+    formatGenderAge,
+    formatCustomFields,
+    hasValue,
+  } = useBasicInfoSection(section.id);
 
   return (
     <>

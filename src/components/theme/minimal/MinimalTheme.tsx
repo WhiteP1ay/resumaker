@@ -43,17 +43,15 @@ const MinimalSinglePage = ({
         </div>
       )}
       {timelineSections.length > 0 && (
-        <div className={`px-8 pb-8 ${pageNumber !== 1 ? 'pt-8' : ''}`}>
-          <div className="space-y-6">
-            {timelineSections.map((section, index) => (
-              <MinimalTimelineSection
-                key={section.id}
-                section={section}
-                isEditable={isEditable}
-                className={getSectionClassName(section.id, `timeline-${index + 1}`)}
-              />
-            ))}
-          </div>
+        <div className="px-8 pb-8 print:pb-0 break-inside-avoid">
+          {timelineSections.map((section, index) => (
+            <MinimalTimelineSection
+              key={section.id}
+              section={section}
+              isEditable={isEditable}
+              className={getSectionClassName(section.id, `timeline-${index + 1}`)}
+            />
+          ))}
         </div>
       )}
     </div>
@@ -88,7 +86,7 @@ export const MinimalTheme = ({
             return (
               <div
                 key={`page-${pageNumber}`}
-                className={`print:page-break-inside-avoid ${isLastPage ? '' : 'print:page-break-after-always'}`}
+                className={`print:break-inside-avoid-page ${isLastPage ? '' : 'print:break-after-page'}`}
               >
                 <MinimalSinglePage
                   resume={resume}

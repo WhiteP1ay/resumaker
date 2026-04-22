@@ -1,4 +1,10 @@
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
 import { usePageSettings } from '@/hooks/components/usePageSettings';
 import { Settings as SettingsIcon } from 'lucide-react';
 import { useEffect, useState } from 'react';
@@ -36,6 +42,9 @@ export const ResumeSettingsDialog = ({ isOpen, onClose }: ResumeSettingsDialogPr
             </div>
             简历设置
           </DialogTitle>
+          <DialogDescription className="sr-only">
+            管理简历模块与分页设置。
+          </DialogDescription>
         </DialogHeader>
 
         {/* Tab Navigation */}

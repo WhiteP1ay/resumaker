@@ -18,8 +18,8 @@ export const MainPage = () => {
   const style = resume.style;
   const resumeStyleCSS = style?.customCSS;
 
-  const handlePreview = () => {
-    window.open('/resume/preview', '_blank');
+  const handlePrint = () => {
+    window.print();
   };
 
   const handleClear = () => {
@@ -28,19 +28,19 @@ export const MainPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 print:bg-white">
       <AppHeader>
-        <ActionButtons onPreview={handlePreview} />
+        <ActionButtons onPrint={handlePrint} />
       </AppHeader>
 
-      <main className="max-w-[1480px] mx-auto p-4">
-        <div className="flex items-start gap-4">
+      <main className="max-w-[1480px] mx-auto p-4 print:p-0 print:max-w-full">
+        <div className="flex items-start gap-4 print:gap-0 print:block">
           <ResumeSettingsSidebar onClearResume={() => setShowClearDialog(true)} />
           <div className="flex-1 min-w-0">
             <ResumeDisplay
               resume={resume}
               isEditable={true}
-              className="max-w-4xl mx-auto p-4 bg-white min-h-screen"
+              className="max-w-4xl mx-auto p-4 bg-white min-h-screen print:mx-0 print:p-0 print:max-w-full print:min-h-0 print:bg-transparent"
             />
           </div>
         </div>

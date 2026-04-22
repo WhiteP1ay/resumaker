@@ -1,5 +1,6 @@
 import { TimelineItemDialog } from '@/components/editors/TimelineItemDialog';
 import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 import type { TimelineItem } from '@/types/resume';
 import { Edit3 } from 'lucide-react';
 import { useState } from 'react';
@@ -13,8 +14,10 @@ interface TimelineContentProps {
 export const TimelineContent = ({ data, isEditable, onUpdateItem }: TimelineContentProps) => {
   const [editingId, setEditingId] = useState<string | null>(null);
 
+  const basicInfoEmpty = (item: TimelineItem) =>
+    !item.title && !item.subtitle && !item.secondarySubtitle && !item.startDate && !item.endDate;
   return (
-    <div className="space-y-4">
+    <>
       {data.map((item) => (
         <div key={item.id} className="relative group/item">
           {isEditable && (
@@ -28,10 +31,15 @@ export const TimelineContent = ({ data, isEditable, onUpdateItem }: TimelineCont
             </Button>
           )}
 
-          <div className="flex justify-between items-start mb-2">
-            <div className="flex-1">
+          <div className="flex justify-between items-start">
+            <div
+              className={cn(
+                basicInfoEmpty(item) ? 'py-0' : 'py-1',
+                'flex-1 flex items-center justify-between',
+              )}
+            >
               {item.title && (
-                <div className="flex items-center space-x-3 mb-1">
+                <div className="flex items-center space-x-3">
                   <h3 className="title text-xl font-semibold text-gray-900 whitespace-pre">
                     {item.title}
                   </h3>
@@ -45,17 +53,17 @@ export const TimelineContent = ({ data, isEditable, onUpdateItem }: TimelineCont
                   {item.secondarySubtitle}
                 </div>
               )}
+              {(item.startDate || item.endDate) && (
+                <div className="date text-sm text-gray-600 ml-4 shrink-0 whitespace-pre">
+                  {item.startDate} {item.startDate && item.endDate && '-'} {item.endDate}
+                </div>
+              )}
             </div>
-            {(item.startDate || item.endDate) && (
-              <div className="date text-sm text-gray-600 ml-4 shrink-0 whitespace-pre">
-                {item.startDate} {item.startDate && item.endDate && '-'} {item.endDate}
-              </div>
-            )}
           </div>
 
           {item.description && (
             <div
-              className="description text-sm text-gray-700 leading-relaxed mt-2 rich-text-display"
+              className="description text-sm text-gray-700 leading-relaxed rich-text-display"
               // biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation>
               dangerouslySetInnerHTML={{ __html: item.description }}
             />
@@ -71,6 +79,6 @@ export const TimelineContent = ({ data, isEditable, onUpdateItem }: TimelineCont
           )}
         </div>
       ))}
-    </div>
+    </>
   );
 };

@@ -1,5 +1,11 @@
 import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { RichTextEditor } from '@/components/ui/rich-text-editor';
@@ -40,6 +46,9 @@ export const TimelineItemDialog = ({ isOpen, item, onSave, onClose }: TimelineIt
             </DialogTitle>
             <span className="text-xs text-gray-400 font-normal">{saveStatusText}</span>
           </div>
+          <DialogDescription className="sr-only">
+            编辑时间线条目的标题、副标题、时间范围与描述，更改将自动保存。
+          </DialogDescription>
         </DialogHeader>
 
         <div className="space-y-4">

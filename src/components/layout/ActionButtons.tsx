@@ -1,16 +1,16 @@
 import { Button } from '@/components/ui/button';
-import { Eye } from 'lucide-react';
+import { Printer } from 'lucide-react';
 
 interface ActionButtonsProps {
-  onPreview: () => void;
+  onPrint: () => void;
 }
 
-export const ActionButtons = ({ onPreview }: ActionButtonsProps) => {
+export const ActionButtons = ({ onPrint }: ActionButtonsProps) => {
   return (
     <div className="flex items-center gap-1.5">
-      <Button onClick={onPreview} size="sm">
-        <Eye className="h-3.5 w-3.5" />
-        <span className="ml-1.5">预览导出</span>
+      <Button onClick={onPrint} size="sm">
+        <Printer className="h-3.5 w-3.5" />
+        <span className="ml-1.5">打印</span>
       </Button>
     </div>
   );

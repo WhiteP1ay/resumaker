@@ -84,7 +84,7 @@ export const SplitTheme = ({
           return (
             <div
               key={`page-${pageNumber}`}
-              className={`print:page-break-inside-avoid ${isLastPage ? '' : 'print:page-break-after-always'}`}
+              className={`print:break-inside-avoid-page ${isLastPage ? '' : 'print:break-after-page'}`}
             >
               <SplitSinglePage
                 resume={resume}

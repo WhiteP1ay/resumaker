@@ -1,5 +1,11 @@
 import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
 import { resumeAtom } from '@/store/resumeStore';
 import { useAtom } from 'jotai';
 import { Palette } from 'lucide-react';
@@ -82,6 +88,9 @@ export const CustomCssEditorDialog = ({ isOpen, onClose }: CustomCssEditorDialog
             </div>
             自定义样式
           </DialogTitle>
+          <DialogDescription className="sr-only">
+            编辑简历的自定义 CSS 样式。
+          </DialogDescription>
         </DialogHeader>
 
         <div className="flex-1 overflow-y-auto px-5 py-4 space-y-6">
