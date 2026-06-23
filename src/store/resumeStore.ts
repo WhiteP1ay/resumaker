@@ -4,11 +4,38 @@ import { atom } from 'jotai';
 import { atomWithStorage } from 'jotai/utils';
 import { initialResume } from './initialResume';
 
+/**
+ * 检查 localStorage 中是否有用户自定义的默认数据，
+ * 有则用它替代编译时的 initialResume。
+ */
+function loadInitialResume(): Resume {
+  try {
+    const stored = localStorage.getItem('resume-custom-default');
+    if (stored) {
+      return JSON.parse(stored) as Resume;
+    }
+  } catch {
+    // 解析失败则回退到编译时默认值
+  }
+  return initialResume;
+}
 
-export const resumeAtom = atomWithStorage<Resume>('resume-data', initialResume);
+export const resumeAtom = atomWithStorage<Resume>('resume-data', loadInitialResume());
 
-export const resetResumeAtom = atom(null, (_get, set) => {
-  set(resumeAtom, initialResume);
+export const customDefaultAtom = atomWithStorage<Resume | null>('resume-custom-default', null);
+
+export const setAsDefaultAtom = atom(null, (get, set) => {
+  const resume = get(resumeAtom);
+  set(customDefaultAtom, resume);
+});
+
+export const clearCustomDefaultAtom = atom(null, (_get, set) => {
+  set(customDefaultAtom, null);
+});
+
+export const resetResumeAtom = atom(null, (get, set) => {
+  const customDefault = get(customDefaultAtom);
+  set(resumeAtom, customDefault ?? initialResume);
 });
 
 export const updateSectionDataAtom = atom(
