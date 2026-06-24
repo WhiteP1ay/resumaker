@@ -1,5 +1,6 @@
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
 
@@ -7,7 +8,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 export default defineConfig(() => ({
   base: '/resume/',
-  plugins: [react()],
+  plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
@@ -37,7 +38,7 @@ export default defineConfig(() => ({
           }
 
           // UI组件库
-          if (id.includes('@radix-ui')) {
+          if (id.includes('radix-ui') || id.includes('/radix-ui/')) {
             return 'ui-vendor';
           }
 

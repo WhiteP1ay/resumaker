@@ -5,6 +5,13 @@ import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
 import {
+  SiFacebook,
+  SiGithub,
+  SiInstagram,
+  SiX,
+  SiYoutube,
+} from '@icons-pack/react-simple-icons';
+import {
   Award,
   Book,
   Briefcase,
@@ -19,19 +26,15 @@ import {
   Cpu,
   CreditCard,
   Database,
-  Facebook,
   FileText,
   Folder,
   Gamepad2,
-  Github,
   Globe,
   GraduationCap,
   Headphones,
   Heart,
   Home,
-  Instagram,
   Link,
-  Linkedin,
   Mail,
   MapPin,
   MessageCircle,
@@ -49,13 +52,14 @@ import {
   Target,
   Trophy,
   Tv,
-  Twitter,
   User,
   Wifi,
-  Youtube,
   Zap,
 } from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
 import React, { useState } from 'react';
+
+type IconComponent = LucideIcon | React.ComponentType<{ className?: string; onClick?: () => void }>;
 
 interface IconPickerProps {
   value: string;
@@ -93,12 +97,12 @@ const PRESET_ICONS = [
   { name: 'settings', icon: Settings, label: '运维' },
 
   // 社交媒体类
-  { name: 'github', icon: Github, label: 'GitHub' },
-  { name: 'linkedin', icon: Linkedin, label: 'LinkedIn' },
-  { name: 'twitter', icon: Twitter, label: 'Twitter' },
-  { name: 'instagram', icon: Instagram, label: 'Instagram' },
-  { name: 'youtube', icon: Youtube, label: 'YouTube' },
-  { name: 'facebook', icon: Facebook, label: 'Facebook' },
+  { name: 'github', icon: SiGithub, label: 'GitHub' },
+  { name: 'linkedin', icon: Building, label: 'LinkedIn' },
+  { name: 'twitter', icon: SiX, label: 'Twitter' },
+  { name: 'instagram', icon: SiInstagram, label: 'Instagram' },
+  { name: 'youtube', icon: SiYoutube, label: 'YouTube' },
+  { name: 'facebook', icon: SiFacebook, label: 'Facebook' },
   { name: 'message-circle', icon: MessageCircle, label: '微信' },
   { name: 'link', icon: Link, label: '链接' },
   { name: 'tv', icon: Tv, label: '电视' },
@@ -125,7 +129,7 @@ const PRESET_ICONS = [
   { name: 'zap', icon: Zap, label: '能量' },
   { name: 'folder', icon: Folder, label: '文件夹' },
   { name: 'briefcase-business', icon: BriefcaseBusiness, label: '商务' },
-] as const;
+] as const satisfies ReadonlyArray<{ name: string; icon: IconComponent; label: string }>;
 
 export const IconPicker: React.FC<IconPickerProps> = ({ value, onChange, label = '图标' }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -159,7 +163,7 @@ export const IconPicker: React.FC<IconPickerProps> = ({ value, onChange, label =
               <DialogTitle className="text-base">选择图标</DialogTitle>
               <DialogDescription>点击图标即可应用到当前模块标题。</DialogDescription>
             </DialogHeader>
-            <div className="max-h-[28rem] overflow-y-auto px-6 pb-6">
+            <div className="max-h-112 overflow-y-auto px-6 pb-6">
               <div className="grid grid-cols-7 gap-2">
                 {PRESET_ICONS.map((iconItem) => (
                   <button

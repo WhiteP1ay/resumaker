@@ -54,7 +54,7 @@ export const DraggableSectionItem: React.FC<DraggableSectionItemProps> = ({
         <div
           {...attributes}
           {...listeners}
-          className={`flex-shrink-0 rounded hover:bg-gray-100 transition-colors cursor-grab active:cursor-grabbing p-0.5 ${
+          className={`shrink-0 rounded hover:bg-gray-100 transition-colors cursor-grab active:cursor-grabbing p-0.5 ${
             isEditing ? 'cursor-not-allowed opacity-30' : ''
           }`}
         >
