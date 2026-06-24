@@ -26,6 +26,7 @@ export const AppHeader = ({ children }: AppHeaderProps) => {
           <Tooltip>
             <TooltipTrigger asChild>
               <button
+                type="button"
                 aria-label="GitHub 源码"
                 className="flex items-center justify-center w-8 h-8 rounded-md text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-all duration-150"
                 onClick={() => window.open('https://github.com/WhiteP1ay/resumaker', '_blank')}
@@ -41,6 +42,7 @@ export const AppHeader = ({ children }: AppHeaderProps) => {
           <Tooltip>
             <TooltipTrigger asChild>
               <button
+                type="button"
                 aria-label="个人网站"
                 className="flex items-center justify-center w-8 h-8 rounded-md text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-all duration-150"
                 onClick={() => window.open('https://whitemeta.cn', '_blank')}

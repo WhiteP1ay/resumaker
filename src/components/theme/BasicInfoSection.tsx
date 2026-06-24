@@ -47,7 +47,7 @@ export const BasicInfoSection = ({ section, isEditable, className }: BasicInfoSe
         {/* 头部布局：左侧信息 + 右侧头像 */}
         <div className="flex items-start justify-between">
           {/* 左侧：姓名和基本信息 */}
-          <div className="flex-1 pr-6 flex flex-col items-center px-[3rem]">
+          <div className="flex-1 pr-6 flex flex-col items-center px-12">
             {/* 姓名 */}
             <h1
               className="text-4xl font-bold text-gray-900 mb-3 print:mb-2 name"

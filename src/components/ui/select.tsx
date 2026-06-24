@@ -23,7 +23,7 @@ export const Select = ({ value, onValueChange, placeholder, options, className }
       value={value || ''}
       onChange={(e) => onValueChange?.(e.target.value)}
       className={cn(
-        'flex h-8 w-full items-center justify-between rounded-md border border-gray-300 bg-white px-3 py-1 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2',
+        'flex h-8 w-full items-center justify-between rounded-md border border-gray-300 bg-white px-3 py-1 text-xs focus:outline-hidden focus:ring-2 focus:ring-blue-500 focus:ring-offset-2',
         className
       )}
     >

@@ -29,7 +29,7 @@ export const TimelineSection: React.FC<TimelineSectionProps> = ({
     <>
       <div className={`relative ${className || ''}`}>
         <div className="mb-6 print:mb-6">
-          <div className="flex items-center pb-[.5rem] border-b-gray-400 border-b-[1px] group/header">
+          <div className="flex items-center pb-[.5rem] border-b-gray-400 border-b group/header">
             <h2 className="section-title text-2xl font-bold leading-tight text-gray-900">
               {section.title}
             </h2>

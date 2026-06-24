@@ -121,7 +121,7 @@ export const CustomCssEditorDialog = ({ isOpen, onClose }: CustomCssEditorDialog
                         setSectionClasses((prev) => ({ ...prev, [id]: e.target.value }))
                       }
                       placeholder={defaultClass}
-                      className="flex-1 h-8 rounded-md border border-gray-200 px-2.5 text-xs font-mono focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="flex-1 h-8 rounded-md border border-gray-200 px-2.5 text-xs font-mono focus:outline-hidden focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     />
                   </div>
                 ))}
@@ -139,7 +139,7 @@ export const CustomCssEditorDialog = ({ isOpen, onClose }: CustomCssEditorDialog
               placeholder="在此编写 CSS..."
               rows={12}
               spellCheck={false}
-              className="w-full rounded-md border border-gray-200 p-3 text-xs font-mono leading-relaxed focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-y"
+              className="w-full rounded-md border border-gray-200 p-3 text-xs font-mono leading-relaxed focus:outline-hidden focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-y"
             />
           </div>
         </div>
