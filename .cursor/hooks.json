@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "hooks": {
+    "preToolUse": [
+      {
+        "command": "python3 .cursor/hooks/protect-components.py",
+        "matcher": "Write|StrReplace|Delete|EditNotebook|Shell",
+        "failClosed": true
+      }
+    ],
+    "beforeShellExecution": [
+      {
+        "command": "python3 .cursor/hooks/protect-components.py",
+        "failClosed": true
+      }
+    ]
+  }
+}

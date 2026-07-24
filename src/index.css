@@ -34,6 +34,38 @@
   font-size: clamp(12px, 1.1vw + 6px, 16px);
 }
 
+@page {
+  size: A4;
+  margin: 0;
+}
+
+@media print {
+  html,
+  body,
+  #root {
+    width: 210mm;
+    min-height: 297mm;
+  }
+
+  .print-container {
+    width: 210mm !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .resume-auto-fit-page {
+    width: 210mm !important;
+    max-width: none !important;
+    height: 297mm !important;
+    box-shadow: none !important;
+  }
+
+  .resume-fit-warning {
+    display: none !important;
+  }
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

@@ -1,4 +1,5 @@
 import type { ThemeRenderProps } from '@/components/theme/themeTypes';
+import { AutoFitSinglePage } from '../AutoFitSinglePage';
 import { MinimalBasicInfoSection } from './MinimalBasicInfoSection';
 import { MinimalTimelineSection } from './MinimalTimelineSection';
 
@@ -7,7 +8,8 @@ const MinimalSinglePage = ({
   isEditable,
   pageNumber = 1,
   getSectionClassName,
-}: Omit<ThemeRenderProps, 'className'> & { pageNumber?: number }) => {
+  autoFit = false,
+}: Omit<ThemeRenderProps, 'className'> & { pageNumber?: number; autoFit?: boolean }) => {
   const basicInfoSection = resume.sections.find((s) => s.type === 'basic');
   const timelineSections = resume.sections
     .filter((s) => s.type === 'timeline')
@@ -21,40 +23,48 @@ const MinimalSinglePage = ({
     .sort((a, b) => a.order - b.order);
 
   return (
-    <div
-      className="minimal-theme-root max-w-4xl mx-auto bg-white shadow-lg print:shadow-none"
-      style={{
-        backgroundColor: 'var(--minimal-paper-bg)',
-      }}
-    >
-      {pageNumber === 1 && basicInfoSection && (
+    <AutoFitSinglePage enabled={autoFit}>
+      {({ pageRef, contentRef, pageStyle, contentStyle }) => (
         <div
-          className="minimal-basic-info-scope"
+          ref={pageRef}
+          className="resume-auto-fit-page minimal-theme-root max-w-4xl mx-auto overflow-hidden bg-white shadow-lg print:shadow-none"
           style={{
-            backgroundColor: 'var(--minimal-basic-info-bg)',
-            marginBottom: 'var(--minimal-basic-info-bottom-spacing)',
+            ...pageStyle,
+            backgroundColor: 'var(--minimal-paper-bg)',
           }}
         >
-          <MinimalBasicInfoSection
-            section={basicInfoSection}
-            isEditable={isEditable}
-            className={getSectionClassName(basicInfoSection.id, 'base-info')}
-          />
+          <div ref={contentRef} style={contentStyle}>
+            {pageNumber === 1 && basicInfoSection && (
+              <div
+                className="minimal-basic-info-scope"
+                style={{
+                  backgroundColor: 'var(--minimal-basic-info-bg)',
+                  marginBottom: 'var(--minimal-basic-info-bottom-spacing)',
+                }}
+              >
+                <MinimalBasicInfoSection
+                  section={basicInfoSection}
+                  isEditable={isEditable}
+                  className={getSectionClassName(basicInfoSection.id, 'base-info')}
+                />
+              </div>
+            )}
+            {timelineSections.length > 0 && (
+              <div className="px-8 pb-8 print:pb-0 break-inside-avoid">
+                {timelineSections.map((section, index) => (
+                  <MinimalTimelineSection
+                    key={section.id}
+                    section={section}
+                    isEditable={isEditable}
+                    className={getSectionClassName(section.id, `timeline-${index + 1}`)}
+                  />
+                ))}
+              </div>
+            )}
+          </div>
         </div>
       )}
-      {timelineSections.length > 0 && (
-        <div className="px-8 pb-8 print:pb-0 break-inside-avoid">
-          {timelineSections.map((section, index) => (
-            <MinimalTimelineSection
-              key={section.id}
-              section={section}
-              isEditable={isEditable}
-              className={getSectionClassName(section.id, `timeline-${index + 1}`)}
-            />
-          ))}
-        </div>
-      )}
-    </div>
+    </AutoFitSinglePage>
   );
 };
 
@@ -72,6 +82,7 @@ export const MinimalTheme = ({
           resume={resume}
           isEditable={isEditable}
           getSectionClassName={getSectionClassName}
+          autoFit={true}
         />
       </div>
     );
