@@ -1,9 +1,11 @@
 import {
   addSectionAtom,
+  clearCustomDefaultAtom,
   deleteSectionAtom,
   getNonBasicSectionsAtom,
   getSectionAtom,
   resetResumeAtom,
+  setAsDefaultAtom,
   updateMultipleSectionsPageAtom,
   updatePageSettingsAtom,
   updateSectionDataAtom,
@@ -33,6 +35,8 @@ export const useResumeActions = () => {
   const updateMultipleSectionsPage = useSetAtom(updateMultipleSectionsPageAtom);
   const updateResumeStyle = useSetAtom(updateResumeStyleAtom);
   const resetResume = useSetAtom(resetResumeAtom);
+  const setAsDefault = useSetAtom(setAsDefaultAtom);
+  const clearCustomDefault = useSetAtom(clearCustomDefaultAtom);
 
   const getSection = useAtomValue(getSectionAtom);
   const getNonBasicSections = useAtomValue(getNonBasicSectionsAtom);
@@ -129,5 +133,7 @@ export const useResumeActions = () => {
     getSection,
     getNonBasicSections,
     clearResume: resetResume,
+    setAsDefault: () => setAsDefault(),
+    clearCustomDefault: () => clearCustomDefault(),
   };
 };
